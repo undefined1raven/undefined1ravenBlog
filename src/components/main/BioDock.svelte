@@ -1,0 +1,141 @@
+<script lang="ts">
+	import { fly } from 'svelte/transition';
+	import { desktopBreakpoints } from '../../config/screenBreakpoints';
+	import { getTransition } from '../../fn/getTransisitions';
+	import globalStyle from '../../stores/globalStyles';
+	import screenSize from '../../stores/screenSize';
+	import Box from '../common/Box.svelte';
+	import Label from '../common/Label.svelte';
+	import BioDeco from '../deco/BioDeco.svelte';
+	type ContainerConfig = { containerHeight: number | string; containerWidth: number | string };
+	$: isMini = $screenSize.width < desktopBreakpoints.first;
+
+	$: containerConfig = {
+		containerHeight: 586,
+		containerWidth: isMini ? 1800 : 707
+	};
+</script>
+
+<Box
+	horizontalCenter={isMini}
+	figmaImport={{
+		desktop: {
+			top: isMini ? 100 : 251,
+			left: isMini ? '50%' : 339,
+			width: containerConfig.containerWidth,
+			height: containerConfig.containerHeight
+		}
+	}}
+	backgroundColor="{$globalStyle.activeColor}10"
+>
+	<BioDeco width="60%" height="60%"></BioDeco>
+	<Box width="100%" height="100%" backdropFilter="blur(4px)"></Box>
+	<Box
+		transitions={{ in: { func: fly, options: { x: '2%', duration: 200, delay: 250 } } }}
+		style="overflow: hidden; right: 2%;"
+		figmaImport={{ desktop: { top: 28, left: 'auto', width: 'auto', height: 'auto' } }}
+		width="15vh"
+		height="15vh"
+		backgroundColor="{$globalStyle.activeColor}00"
+		><img alt="Selfie" style="user-select: none;" width="100%" height="auto" src="/pic.webp" /></Box
+	>
+	<Label
+		transitions={getTransition(5)}
+		style="letter-spacing: 0.2vh"
+		desktopFont={$globalStyle.largeDesktopFont}
+		figmaImportConfig={containerConfig}
+		figmaImport={{ desktop: { left: 14, top: 28 } }}
+		text="undefined1raven.dev"
+	></Label>
+	<Label
+		transitions={getTransition(6)}
+		color={$globalStyle.secondaryMono}
+		desktopFont={$globalStyle.mediumDesktopFont}
+		figmaImportConfig={containerConfig}
+		figmaImport={{ desktop: { left: 14, top: 73 } }}
+		text="Dominic Zlat"
+	></Label>
+
+	<Label
+		transitions={getTransition(3)}
+		color={$globalStyle.secondaryMono}
+		desktopFont={$globalStyle.tinyDesktopFont}
+		figmaImportConfig={containerConfig}
+		backgroundColor="{$globalStyle.activeColor}10"
+		figmaImport={{
+			desktop: {
+				left: '0',
+				top: isMini ? -70 : containerConfig.containerHeight + 9,
+				width: isMini ? 220 : 101,
+				height: 25
+			}
+		}}
+		style="border-top-right-radius: 0; border-bottom-right-radius: 0;"
+		align="left"
+		alignPadding="1%"
+		text="Commit Hash:"
+	></Label>
+	<Label
+		transitions={getTransition(3)}
+		color={$globalStyle.secondaryMono}
+		desktopFont={$globalStyle.tinyDesktopFont}
+		figmaImportConfig={containerConfig}
+		backgroundColor="{$globalStyle.activeColor}10"
+		figmaImport={{
+			desktop: {
+				left: isMini ? 250 : 115,
+				top: isMini ? -70 : containerConfig.containerHeight + 9,
+				width: isMini ? 220 : 101,
+				height: 25
+			}
+		}}
+		align="left"
+		alignPadding="1%"
+		style="border-top-left-radius: 0; border-bottom-left-radius: 0;"
+		text="NNFDE"
+	></Label>
+	<Label
+		transitions={getTransition(4)}
+		color={$globalStyle.secondaryMono}
+		desktopFont={$globalStyle.tinyDesktopFont}
+		figmaImportConfig={containerConfig}
+		backgroundColor="{$globalStyle.activeColor}10"
+		figmaImport={{
+			desktop: {
+				left: '0',
+				top: isMini ? -38 : containerConfig.containerHeight + 43,
+				width: isMini ? 220 : 101,
+				height: 25
+			}
+		}}
+		style="border-top-right-radius: 0; border-bottom-right-radius: 0;"
+		align="left"
+		alignPadding="1%"
+		text="Last Update:"
+	></Label>
+	<Label
+		transitions={getTransition(4)}
+		color={$globalStyle.secondaryMono}
+		desktopFont={$globalStyle.tinyDesktopFont}
+		figmaImportConfig={containerConfig}
+		backgroundColor="{$globalStyle.activeColor}10"
+		figmaImport={{
+			desktop: {
+				left: isMini ? 250 : 115,
+				top: isMini ? -38 : containerConfig.containerHeight + 43,
+				width: isMini ? 220 : 101,
+				height: 25
+			}
+		}}
+		align="left"
+		alignPadding="1%"
+		style="border-top-left-radius: 0; border-bottom-left-radius: 0;"
+		text="4 Mar 2024"
+	></Label>
+</Box>
+
+<style>
+	:global(.noScrollBar::-webkit-scrollbar) {
+		display: none;
+	}
+</style>

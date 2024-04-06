@@ -1,0 +1,68 @@
+<script lang="ts">
+	import globalStyles from '../stores/globalStyles';
+	import { appColors } from '../config/appColors';
+	import type { colorIDs } from '../stores/activeColorSchemeID';
+	import { activeColorSchemeID } from '../stores/activeColorSchemeID';
+	import ToolTip from '../components/common/ToolTip.svelte';
+	import toolTipState from '../stores/toolTipState';
+	import { onMount } from 'svelte';
+	import mousePosition from '../stores/mousePosition';
+	import { touchStart, touchMove, touchEnd } from '../stores/touchGestures';
+	import screenSize from '../stores/screenSize';
+	import { desktopBreakpoints } from '../config/screenBreakpoints';
+	import Menu from '../components/common/Desktop/Menu.svelte';
+	import windowHash from '../stores/windowHash';
+	function onColorSchemeIDChange(colorID: colorIDs) {
+		let stylesOverride = appColors[colorID];
+		if (stylesOverride !== undefined) {
+			const configOverrideKeys = Object.keys(stylesOverride);
+			globalStyles.update((gs) => {
+				for (let ix = 0; ix < configOverrideKeys.length; ix++) {
+					gs[configOverrideKeys[ix]] = stylesOverride[configOverrideKeys[ix]];
+				}
+				return gs;
+			});
+		}
+	}
+
+	$: onColorSchemeIDChange($activeColorSchemeID);
+
+	$: isMini = $screenSize.width < desktopBreakpoints.first;
+	$: menuProps = {
+		'#main': {
+			top: isMini ? 37 : 144,
+			left: isMini ? 880 : 339,
+			width: isMini ? 1800 : 852
+		},
+		'#contact': {
+			top: isMini ? 37 : 144,
+			left: isMini ? 880 : 339,
+			width: isMini ? 1800 : 852
+		},
+		'#projectView': {
+			top: isMini ? 37 : 144,
+			left: isMini ? 880 : 339,
+			width: isMini ? 1800 : 852
+		}
+	};
+</script>
+
+<!-- <svelte:window
+	on:mousemove={(e) => {
+		setTimeout(() => {
+			mousePosition.set({ x: e.clientX, y: e.clientY });
+		}, 200);
+	}}
+	on:touchend={(e) => {
+		// touchEnd.set(e.touches);
+	}}
+	on:touchmove={(e) => {
+		// touchMove.set(e.touches);
+	}}
+	on:touchstart={(e) => {
+		// touchStart.set(e.touches);
+	}}
+/> -->
+<ToolTip show={$toolTipState.show} text={$toolTipState.text} />
+<Menu {...menuProps[$windowHash]}></Menu>
+<slot />
