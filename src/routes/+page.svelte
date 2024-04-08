@@ -9,6 +9,7 @@
 	import Menu from '../components/common/Desktop/Menu.svelte';
 	import screenSize from '../stores/screenSize';
 	import { desktopBreakpoints } from '../config/screenBreakpoints';
+	import ProjectViewMain from '../components/projectView/ProjectViewMain.svelte';
 	let blurFilterVal = 10;
 
 	const allowedHashes = ['main', 'contact', 'tree', 'projectView'];
@@ -32,11 +33,14 @@
 		}
 	}
 
-	const hashToComponent = { '#main': Main, '#contact': Main, '#tree': Menu, '#projectView': Menu };
+	const hashToComponent = {
+		'#main': Main,
+		'#contact': Main,
+		'#tree': Menu,
+		'#projectView': ProjectViewMain
+	};
 
 	$: onHashChange($windowHash);
-
-
 </script>
 
 {#if blurFilterVal > 0}
@@ -51,7 +55,6 @@
 {/if}
 
 <svelte:component this={hashToComponent[$windowHash]}></svelte:component>
-
 
 <style>
 	:global(body) {

@@ -12,6 +12,7 @@
 	import { desktopBreakpoints } from '../config/screenBreakpoints';
 	import Menu from '../components/common/Desktop/Menu.svelte';
 	import windowHash from '../stores/windowHash';
+	import TopDecoBar from '../components/common/TopDecoBar.svelte';
 	function onColorSchemeIDChange(colorID: colorIDs) {
 		let stylesOverride = appColors[colorID];
 		if (stylesOverride !== undefined) {
@@ -40,9 +41,9 @@
 			width: isMini ? 1800 : 852
 		},
 		'#projectView': {
-			top: isMini ? 37 : 144,
-			left: isMini ? 880 : 339,
-			width: isMini ? 1800 : 852
+			top: isMini ? 64 : 64,
+			left: isMini ? 296 : 296,
+			width: isMini ? 847 : 847
 		}
 	};
 </script>
@@ -65,4 +66,5 @@
 /> -->
 <ToolTip show={$toolTipState.show} text={$toolTipState.text} />
 <Menu {...menuProps[$windowHash]}></Menu>
+<TopDecoBar></TopDecoBar>
 <slot />
