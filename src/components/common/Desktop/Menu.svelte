@@ -13,17 +13,45 @@
 	import windowHash from '../../../stores/windowHash';
 	import DropdownDeco from '../../deco/DropdownDeco.svelte';
 	import VerticalLine from '../VerticalLine.svelte';
+	import {
+		contactButton,
+		mainButton,
+		projectViewBackButton,
+		techTreeButton
+	} from '../../../config/menuButtons';
 	let top = 144;
 	let left = 339;
 	let height = 45;
 	let width = 852;
 	$: isMini = $screenSize.width < desktopBreakpoints.first;
 
+	const hashToMenuArray = {
+		'#main': [mainButton, techTreeButton, contactButton],
+		'#contact': [mainButton, techTreeButton, contactButton],
+		'#projectView': [projectViewBackButton, mainButton, techTreeButton, contactButton]
+	};
+
+	function onHashChange(windowHash) {
+		if (hashToMenuArray[windowHash]) {
+			menu.set(hashToMenuArray[windowHash]);
+		}
+	}
+
+	$: onHashChange($windowHash);
+
 	function getButtonWidth(menuButton: MenuButton, isMini) {
 		if (menuButton.type === 'classic') {
 			return isMini ? 300 : 158;
 		} else {
 			return isMini ? 350 : 228;
+		}
+	}
+
+	function onButtonInteraction(button: MenuButton) {
+		if (button.navHash) {
+			window.location.hash = button.navHash;
+		} else {
+			window.location.hash = button.hash;
 		}
 	}
 
@@ -39,21 +67,15 @@
 			selectedButton = backMenuButton;
 		}
 		if (selectedButton) {
-			window.location.hash = selectedButton.hash;
-			setTimeout(() => {
-				menu.update((lastMenu) => {
-					if (selectedButton.type === 'back') {
-						const buttonIndex = lastMenu.indexOf(selectedButton);
-						console.log(buttonIndex);
-						lastMenu.splice(buttonIndex, 1);
-					}
-					return lastMenu;
-				});
-			}, 10);
+			onButtonInteraction(selectedButton);
 		}
 	}}
 />
-<List style="transition: all ease-out 0.15s;" direction="row" figmaImport={{ desktop: { top, left, height, width } }}>
+<List
+	style="transition: all ease-out 0.15s;"
+	direction="row"
+	figmaImport={{ desktop: { top, left, height, width } }}
+>
 	{#each $menu as menuButton, ix}
 		<ListItem
 			transitions={getTransition(ix + 4)}
@@ -106,7 +128,7 @@
 					desktopFont={$globalStyle.mediumDesktopFont}
 					width="100%"
 					onClick={() => {
-						window.location.hash = menuButton.hash;
+						onButtonInteraction(menuButton);
 					}}
 					height="100%"
 					isSelected={$windowHash === menuButton.hash}

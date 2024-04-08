@@ -1,11 +1,18 @@
 <script>
 	import { desktopBreakpoints } from '../../config/screenBreakpoints';
+	import { getTransition } from '../../fn/getTransisitions';
 	import globalStyle from '../../stores/globalStyles';
 	import screenSize from '../../stores/screenSize';
 	import Box from '../common/Box.svelte';
 	import Menu from '../common/Desktop/Menu.svelte';
+	import Label from '../common/Label.svelte';
 	import TopDecoBar from '../common/TopDecoBar.svelte';
 	import ProjectViewDeco from '../deco/ProjectViewDeco.svelte';
+
+	$: containerConfig = {
+		containerHeight: 859,
+		containerWidth: $screenSize.minimized ? 1329 : 1329
+	};
 </script>
 
 <Box
@@ -14,4 +21,80 @@
 	backgroundColor="{$globalStyle.activeColor}07"
 >
 	<ProjectViewDeco width="60%" height="60%" style="opacity: 0.1;"></ProjectViewDeco>
+	<Label
+		transitions={getTransition(3)}
+		color={$globalStyle.secondaryMono}
+		desktopFont={$globalStyle.tinyDesktopFont}
+		figmaImportConfig={containerConfig}
+		backgroundColor="{$globalStyle.activeColor}10"
+		figmaImport={{
+			desktop: {
+				left: '0',
+				top: $screenSize.minimized ? -70 : containerConfig.containerHeight + 9,
+				width: $screenSize.minimized ? 220 : 101,
+				height: 25
+			}
+		}}
+		style="border-top-right-radius: 0; border-bottom-right-radius: 0;"
+		align="left"
+		alignPadding="1%"
+		text="Project ID"
+	></Label>
+	<Label
+		transitions={getTransition(3)}
+		color={$globalStyle.secondaryMono}
+		desktopFont={$globalStyle.tinyDesktopFont}
+		figmaImportConfig={containerConfig}
+		backgroundColor="{$globalStyle.activeColor}10"
+		figmaImport={{
+			desktop: {
+				left: $screenSize.minimized ? 250 : 120,
+				top: $screenSize.minimized ? -70 : containerConfig.containerHeight + 9,
+				width: $screenSize.minimized ? 220 : 101,
+				height: 25
+			}
+		}}
+		align="left"
+		alignPadding="0.5%"
+		style="border-top-left-radius: 0; border-bottom-left-radius: 0; padding-right: 5%;"
+		text="ring-relay-v2"
+	></Label>
+	<Label
+		transitions={getTransition(4)}
+		color={$globalStyle.secondaryMono}
+		desktopFont={$globalStyle.tinyDesktopFont}
+		figmaImportConfig={containerConfig}
+		backgroundColor="{$globalStyle.activeColor}10"
+		figmaImport={{
+			desktop: {
+				left: '0',
+				top: $screenSize.minimized ? -38 : containerConfig.containerHeight + 43,
+				width: $screenSize.minimized ? 220 : 101,
+				height: 25
+			}
+		}}
+		style="border-top-right-radius: 0; border-bottom-right-radius: 0;"
+		align="left"
+		alignPadding="1%"
+		text="Last Update:"
+	></Label>
+	<Label
+		transitions={getTransition(4)}
+		color={$globalStyle.secondaryMono}
+		desktopFont={$globalStyle.tinyDesktopFont}
+		figmaImportConfig={containerConfig}
+		backgroundColor="{$globalStyle.activeColor}10"
+		figmaImport={{
+			desktop: {
+				left: $screenSize.minimized ? 250 : 120,
+				top: $screenSize.minimized ? -38 : containerConfig.containerHeight + 43,
+				width: $screenSize.minimized ? 220 : 101,
+				height: 25
+			}
+		}}
+		align="left"
+		alignPadding="0.5%"
+		style="border-top-left-radius: 0; border-bottom-left-radius: 0; padding-right: 5%;"
+		text="4 Mar 2024"
+	></Label>
 </Box>

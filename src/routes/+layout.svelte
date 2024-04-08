@@ -44,10 +44,15 @@
 			top: isMini ? 64 : 64,
 			left: isMini ? 296 : 296,
 			width: isMini ? 847 : 847
+		},
+		'#tree': {
+			top: isMini ? 64 : 64,
+			left: isMini ? 296 : 296,
+			width: isMini ? 847 : 847
 		}
 	};
 </script>
- 
+
 <!-- <svelte:window
 	on:mousemove={(e) => {
 		setTimeout(() => {

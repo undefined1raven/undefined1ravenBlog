@@ -30,21 +30,6 @@
 
 	function onProjectSelection(project) {
 		selectedProject.set(project);
-		menu.update((pm) => {
-			let projectViewBackButton: MenuButton = {
-				title: 'Project View',
-				type: 'back',
-				hash: '#main',
-				hotkey: 'escape',
-				id: 'projectView',
-				func: null
-			};
-			let newMenu = [projectViewBackButton];
-			for (let ix = 0; ix < pm.length; ix++) {
-				newMenu.push(pm[ix]);
-			}
-			return newMenu;
-		});
 		setTimeout(() => {
 			window.location.hash = 'projectView';
 		}, 30);

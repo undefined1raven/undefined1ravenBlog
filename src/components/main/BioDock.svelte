@@ -28,11 +28,12 @@
 	}}
 	backgroundColor="{$globalStyle.activeColor}10"
 >
-	<BioDeco width="60%" height="60%"></BioDeco>
-	<Box width="100%" height="100%" backdropFilter="blur(4px)"></Box>
+	<BioDeco style="opacity: 0.1;" width="60%" height="60%"></BioDeco>
+	<Box width="100%" height="100%" backdropFilter="blur(0px)"></Box>
 	<Box
+		borderColor={$globalStyle.inactiveColor}
 		transitions={{ in: { func: fly, options: { x: '2%', duration: 200, delay: 250 } } }}
-		style="overflow: hidden; right: 2%;"
+		style="overflow: hidden; right: 2%; box-shadow: 0px 0px 12px {$globalStyle.inactiveColor};"
 		figmaImport={{ desktop: { top: 28, left: 'auto', width: 'auto', height: 'auto' } }}
 		width="15vh"
 		height="15vh"

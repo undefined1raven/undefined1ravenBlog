@@ -36,7 +36,7 @@
 	const hashToComponent = {
 		'#main': Main,
 		'#contact': Main,
-		'#tree': Menu,
+		'#tree': Label,
 		'#projectView': ProjectViewMain
 	};
 
