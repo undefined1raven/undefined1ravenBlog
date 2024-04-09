@@ -13,6 +13,8 @@
 	import Menu from '../components/common/Desktop/Menu.svelte';
 	import windowHash from '../stores/windowHash';
 	import TopDecoBar from '../components/common/TopDecoBar.svelte';
+	import { selectedProject } from '../stores/selectedProject';
+
 	function onColorSchemeIDChange(colorID: colorIDs) {
 		let stylesOverride = appColors[colorID];
 		if (stylesOverride !== undefined) {
@@ -26,6 +28,15 @@
 		}
 	}
 
+	function onHashChange(windowHash) {
+		if (windowHash === '#projectView') {
+			activeColorSchemeID.set($selectedProject.colorID);
+		} else {
+			activeColorSchemeID.set('main');
+		}
+	}
+
+	$: onHashChange($windowHash);
 	$: onColorSchemeIDChange($activeColorSchemeID);
 
 	$: isMini = $screenSize.width < desktopBreakpoints.first;

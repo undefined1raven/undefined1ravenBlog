@@ -118,7 +118,7 @@
 					color={$globalStyle.secondaryColor}
 					height="2vh"
 					left="auto"
-					style="right: 0%; border-top-left-radius: 0; border-top-right-radius: 0;"
+					style="right: 0%; border-top-left-radius: 0; border-top-right-radius: 0; border-bottom-right-radius: 0;"
 					desktopFont={$globalStyle.verySmallDesktopFont}
 					text={'ESC'}
 				></Label>
@@ -127,6 +127,7 @@
 					label={menuButton.title}
 					desktopFont={$globalStyle.mediumDesktopFont}
 					width="100%"
+					backgroundColor={$globalStyle.activeColor}
 					onClick={() => {
 						onButtonInteraction(menuButton);
 					}}

@@ -5,7 +5,7 @@
 	import screenSize from '../../stores/screenSize';
 	import GlobalStyles from '../../config/GlobalStyles';
 	import FigmaImporter from '../../fn/figmaImporter.js';
-	import getFigmaImportConfig from '../../config/FigmaImportConfig';
+	import getFigmaImportConfig from '../../config/FigmaImportConfig.js';
 	import { createEventDispatcher } from 'svelte';
 	import isMobile from '../../fn/isMobile';
 	import globalStyle from '../../stores/globalStyles.js';

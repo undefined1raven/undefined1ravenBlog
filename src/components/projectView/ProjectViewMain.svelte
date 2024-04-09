@@ -8,6 +8,9 @@
 	import Label from '../common/Label.svelte';
 	import TopDecoBar from '../common/TopDecoBar.svelte';
 	import ProjectViewDeco from '../deco/ProjectViewDeco.svelte';
+	import ProjectViewTitleHeader from './ProjectViewTitleHeader.svelte';
+	import { selectedProject } from '../../stores/selectedProject.ts';
+	import ProjectViewQuickLinks from './ProjectViewQuickLinks.svelte';
 
 	$: containerConfig = {
 		containerHeight: 859,
@@ -21,6 +24,8 @@
 	backgroundColor="{$globalStyle.activeColor}07"
 >
 	<ProjectViewDeco width="60%" height="60%" style="opacity: 0.1;"></ProjectViewDeco>
+	<ProjectViewTitleHeader topContainerConfig={containerConfig}></ProjectViewTitleHeader>
+	<ProjectViewQuickLinks topContainerConfig={containerConfig}></ProjectViewQuickLinks>
 	<Label
 		transitions={getTransition(3)}
 		color={$globalStyle.secondaryMono}
@@ -57,7 +62,7 @@
 		align="left"
 		alignPadding="0.5%"
 		style="border-top-left-radius: 0; border-bottom-left-radius: 0; padding-right: 5%;"
-		text="ring-relay-v2"
+		text={$selectedProject.projectID}
 	></Label>
 	<Label
 		transitions={getTransition(4)}

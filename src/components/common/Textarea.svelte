@@ -5,7 +5,7 @@
 	import screenSize from '../../stores/screenSize.js';
 	import GlobalStyles from '../../config/GlobalStyles.js';
 	import FigmaImporter from '../../fn/figmaImporter.js';
-	import getFigmaImportConfig from '../../config/FigmaImportConfig.js';
+	import getFigmaImportConfig from '../../config/FigmaImportConfig';
 	import { createEventDispatcher } from 'svelte';
 	import globalStyle from '../../stores/globalStyles';
 	import readTransitions from '../../fn/readTransitions.js';

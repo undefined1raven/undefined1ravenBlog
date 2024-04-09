@@ -1,8 +1,9 @@
 import type { SvelteComponent } from "svelte";
 import type { colorIDs } from "../stores/activeColorSchemeID";
 import Label from "../components/common/Label.svelte";
+import RingRelayDeco from "../components/deco/RingRelayDeco.svelte";
 
-type Flag = 'live' | 'src' | 'dev' | 'dep' | 'v1';
+type Flag = 'live' | 'src' | 'dev' | 'dep' | 'v1' | 'docs';
 type Project = {
     title: string,
     shortDescription: string,
@@ -14,8 +15,25 @@ type Project = {
     colorID: colorIDs,
     deploymentHref: string,
     srcHref: string,
+    docsHref?: string,
+    projectID: string,
+    logoProps: Object,
 }
 const projects: Array<Project> = [
+    {
+        title: 'Ring Relay',
+        shortDescription: 'E2E Encrypted Messaging App',
+        deploymentHref: 'https://ring-relay.vercel.app',
+        logo: RingRelayDeco,
+        logoProps: { width: '100%', height: '70%' },
+        srcHref: 'https://github.com/undefined1raven/Ring-Relay',
+        flags: ['live', 'src', 'v1', 'docs'],
+        startDate: 0,
+        endDate: 0,
+        colorID: 'ringRelay',
+        projectID: 'ring-relay-v2',
+        fullDescription: 'to do 2'
+    },
     {
         title: 'ARC',
         shortDescription: 'Daily planner / Time Tracking & more ',
@@ -26,19 +44,8 @@ const projects: Array<Project> = [
         srcHref: 'https://github.com/undefined1raven/arc',
         endDate: 0,
         colorID: 'arc',
+        projectID: 'sys_ctl_arc',
         fullDescription: 'to do'
-    },
-    {
-        title: 'Ring Relay',
-        shortDescription: 'E2E Encrypted Messaging App',
-        deploymentHref: 'https://ring-relay.vercel.app',
-        logo: Label,
-        srcHref: 'https://github.com/undefined1raven/Ring-Relay',
-        flags: ['live', 'src', 'v1'],
-        startDate: 0,
-        endDate: 0,
-        colorID: 'ringRelay',
-        fullDescription: 'to do 2'
     },
     {
         title: 'Eagle',
@@ -50,6 +57,7 @@ const projects: Array<Project> = [
         deploymentHref: '',
         endDate: 0,
         colorID: 'eagle',
+        projectID: '',
         fullDescription: 'to do 2'
     },
     {
@@ -62,6 +70,7 @@ const projects: Array<Project> = [
         deploymentHref: '',
         endDate: 0,
         colorID: 'devLogs',
+        projectID: '',
         fullDescription: 'to do 2'
     }, {
         title: 'Drone Buzz',
@@ -73,6 +82,7 @@ const projects: Array<Project> = [
         startDate: 0,
         endDate: 0,
         colorID: 'droneBuzz',
+        projectID: '',
         fullDescription: 'to do 2'
     },
     {
@@ -85,6 +95,7 @@ const projects: Array<Project> = [
         endDate: 0,
         deploymentHref: '',
         colorID: 'ringRelay',
+        projectID: '',
         fullDescription: 'to do 2'
     }
 ];

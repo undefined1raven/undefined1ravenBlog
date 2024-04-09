@@ -4,7 +4,7 @@
 	import { RangeScaler } from '../../fn/RangeScaler.js';
 	import screenSize from '../../stores/screenSize';
 	import FigmaImporter from '../../fn/figmaImporter.js';
-	import getFigmaImportConfig from '../../config/FigmaImportConfig';
+	import getFigmaImportConfig from '../../config/FigmaImportConfig.js';
 	import readTransitions from '../../fn/readTransitions.js';
 	import globalStyle from '../../stores/globalStyles.js';
 	import toolTipState from '../../stores/toolTipState';
@@ -175,7 +175,7 @@
 				toolTipState.set({ text: toolTipText, show: false });
 			}
 		}}
-		class={`label ibm-plex mono-regular ${className ? className : ''}`}
+		class={`label ${className ? className : ''}`}
 		style="
     opacity: {iu(opacity, '1')}; 
 	letter-spacing: 0.1vh;
