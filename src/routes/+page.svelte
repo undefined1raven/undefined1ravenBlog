@@ -25,7 +25,7 @@
 	function onHashChange(windowHash) {
 		if (allowedHashes.find((elm) => `#${elm}` === windowHash) === undefined) {
 			window.location.hash = '#main';
-			document.title = `/undefined1raven\\`;
+			// document.title = `/undefined1raven\\`;
 			menuRedraw = false;
 			setTimeout(() => {
 				menuRedraw = true;

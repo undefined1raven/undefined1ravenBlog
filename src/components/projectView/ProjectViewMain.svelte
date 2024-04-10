@@ -11,11 +11,19 @@
 	import ProjectViewTitleHeader from './ProjectViewTitleHeader.svelte';
 	import { selectedProject } from '../../stores/selectedProject.ts';
 	import ProjectViewQuickLinks from './ProjectViewQuickLinks.svelte';
+	import ProjectViewMenu from './ProjectViewMenu.svelte';
+	import ProjectViewContentContainer from './ProjectViewContentContainer.svelte';
+	import { onMount } from 'svelte';
+	import { selectedChapter } from './selectedChapter';
 
 	$: containerConfig = {
 		containerHeight: 859,
 		containerWidth: $screenSize.minimized ? 1329 : 1329
 	};
+
+	onMount(() => {
+		selectedChapter.set($selectedProject.chapters[0]);
+	});
 </script>
 
 <Box
@@ -26,6 +34,8 @@
 	<ProjectViewDeco width="60%" height="60%" style="opacity: 0.1;"></ProjectViewDeco>
 	<ProjectViewTitleHeader topContainerConfig={containerConfig}></ProjectViewTitleHeader>
 	<ProjectViewQuickLinks topContainerConfig={containerConfig}></ProjectViewQuickLinks>
+	<ProjectViewMenu topContainerConfig={containerConfig}></ProjectViewMenu>
+	<ProjectViewContentContainer topContainerConfig={containerConfig}></ProjectViewContentContainer>
 	<Label
 		transitions={getTransition(3)}
 		color={$globalStyle.secondaryMono}

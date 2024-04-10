@@ -15,12 +15,33 @@
 	import Button from '../common/Button.svelte';
 	import ListItem from '../common/ListItem.svelte';
 	import GithubLogo from '../deco/githubLogo.svelte';
+	import { onDestroy, onMount } from 'svelte';
 	let topContainerConfig = {};
 	let componentsContainer = { containerHeight: 71, containerWidth: 570 };
 
 	const filteredProjectFlags = $selectedProject.flags.filter(
 		(elm) => elm === 'docs' || elm === 'src' || elm === 'live'
 	);
+
+	let liveDeploymentDotOpacity = 1;
+	let liveDeploymentDotInterval;
+	onMount(() => {
+		liveDeploymentDotOpacity = 0.2;
+		liveDeploymentDotInterval = setInterval(() => {
+			if (liveDeploymentDotOpacity === 1) {
+				liveDeploymentDotOpacity = 0.2;
+			} else {
+				liveDeploymentDotOpacity = 1;
+			}
+		}, 700);
+	});
+
+	onDestroy(() => {
+		if (liveDeploymentDotInterval) {
+			clearInterval(liveDeploymentDotInterval);
+		}
+	});
+
 	export { topContainerConfig };
 </script>
 
@@ -67,7 +88,7 @@
 							><Box
 								width="1vh"
 								height="1vh"
-								style="right: 3%;"
+								style="right: 3%; opacity: {liveDeploymentDotOpacity}; transition: linear 0.5s !important;"
 								borderRadius="1000px"
 								backgroundColor={$globalStyle.successColor}
 							></Box></Button
@@ -80,7 +101,7 @@
 					transitions={getTransition(ix)}
 					height="100%"
 					width="20%"
-					style="margin-right: 2.1%; margin-left: 2.5%;"
+					style="margin-right: 0.1%; margin-left: 2.3%;"
 					><a
 						style="padding: 0; margin: 0; position: absolute; width: 100%; height: 100%;"
 						href={$selectedProject.docsHref}

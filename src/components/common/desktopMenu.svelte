@@ -6,7 +6,7 @@
 	import Label from './Label.svelte';
 	let lglobalStyles = $globalStyle;
 	import ChaseLogo from '../deco/ChaseLogo.svelte';
-	import Logo from '../deco/Logo.svelte';
+	import Logo from '../deco/ARCLogo.svelte';
 	import HomeDeco from '../deco/HomeDeco.svelte';
 	import TeamDeco from '../deco/TeamDeco.svelte';
 	import SignUpDeco from '../deco/SignUpDeco.svelte';

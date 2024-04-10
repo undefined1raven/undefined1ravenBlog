@@ -10,6 +10,7 @@
 	import TopDecoBar from '../common/TopDecoBar.svelte';
 	import ProjectViewDeco from '../deco/ProjectViewDeco.svelte';
 	import { fly } from 'svelte/transition';
+	import PlaceholderLogo from '../deco/PlaceholderLogo.svelte';
 
 	let topContainerConfig = {};
 	let componentsContainer = { containerHeight: 100, containerWidth: 458 };
@@ -34,11 +35,13 @@
 		width="20%"
 		left="0%"
 		top="0%"
-		><svelte:component this={$selectedProject.logo} {...$selectedProject.logoProps}
+		><svelte:component
+			this={$selectedProject.logo !== 'placeholder' ? $selectedProject.logo : PlaceholderLogo}
+			{...$selectedProject.logoProps}
 		></svelte:component></Box
 	>
 	<Label
-		transitions={getTransition(2)}
+		transitions={getTransition(2, undefined, 'x')}
 		text={$selectedProject.title}
 		align="left"
 		desktopFont={$globalStyle.veryLargeDesktopFont}
