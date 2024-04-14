@@ -6,9 +6,16 @@ import AboutTemplate from "../components/content/templates/AboutTemplate.svelte"
 import { RingRelayFullDescription } from "../components/content/RingRelay/fullDescription";
 import ArcLogo from "../components/deco/ARCLogo.svelte";
 import MainMenuDeco from "../components/deco/DronebuzzLogo.svelte";
+import FrontendLogo from "../components/deco/FrontendLogo.svelte";
+import TechstackTemplate from "../components/content/templates/TechstackTemplate.svelte";
 
-type Chapter = { title: 'about' | 'status' | '3rdParty' | 'tech' | 'features', content: SvelteComponent };
+type Chapter = { title: string, content: SvelteComponent, id: 'about' | 'status' | '3rdParty' | 'tech' | 'features' };
 type Flag = 'live' | 'src' | 'dev' | 'dep' | 'v1' | 'docs';
+type StackMember = { title: string, name: string, deco: SvelteComponent | 'default' }
+type StackComponent = { title: string, deco: SvelteComponent | 'default', members: Array<StackMember> };
+
+const frontendStackComponentDefaults: StackComponent = { title: 'Front-end', deco: FrontendLogo, members: [] }
+
 type Project = {
     title: string,
     shortDescription: string,
@@ -24,6 +31,8 @@ type Project = {
     docsHref?: string,
     projectID: string,
     logoProps: Object,
+    techStack?: Array<StackComponent>,
+
 }
 const projects: Array<Project> = [
     {
@@ -36,9 +45,10 @@ const projects: Array<Project> = [
         flags: ['live', 'src', 'v1', 'docs'],
         startDate: 0,
         endDate: 0,
-        chapters: [{ title: 'about', content: AboutTemplate }],
+        chapters: [{ title: 'About', content: AboutTemplate, id: 'about' }, { title: 'Tech Stack', content: TechstackTemplate, id: 'tech' }],
         colorID: 'ringRelay',
         projectID: 'ring-relay-v2',
+        techStack: [{ ...frontendStackComponentDefaults, members: [{ title: 'React', deco: 'default', name: 'Library' }] }],
         fullDescription: RingRelayFullDescription
     },
     {
@@ -51,8 +61,9 @@ const projects: Array<Project> = [
         deploymentHref: 'https://ankaryn.online',
         srcHref: 'https://github.com/undefined1raven/arc',
         endDate: 0,
-        chapters: [{ title: 'about', content: AboutTemplate }],
+        chapters: [{ title: 'About', content: AboutTemplate, id: 'about' }],
         colorID: 'arc',
+        techStack: [],
         projectID: 'sys_ctl_arc',
         fullDescription: `Arc is a mobile app that allows anyone to track and plan many aspects of our daily lives. The app
         doesn't require an email/password pair to sign up, but it's rather using a one-click sign up flow by using
@@ -64,13 +75,14 @@ const projects: Array<Project> = [
     },
     {
         title: 'Eagle',
-        shortDescription: 'E2E Encrypted Messaging App',
+        shortDescription: 'Remotely flown custom UAV',
         srcHref: 'https://github.com/undefined1raven/VultureLink',
         flags: ['src'],
-        chapters: [{ title: 'about', content: AboutTemplate }],
+        chapters: [{ title: 'About', content: AboutTemplate, id: 'about' }],
         logo: 'placeholder',
         startDate: 0,
         deploymentHref: '',
+        techStack: [],
         endDate: 0,
         colorID: 'eagle',
         projectID: 'eagle-lts',
@@ -83,12 +95,13 @@ const projects: Array<Project> = [
     },
     {
         title: 'Dev Logs',
-        shortDescription: 'E2E Encrypted Messaging App',
+        shortDescription: 'Dev Blog / Knowledge Base',
         srcHref: '',
         flags: ['dev'],
-        chapters: [{ title: 'about', content: AboutTemplate }],
+        chapters: [{ title: 'About', content: AboutTemplate, id: 'about' }],
         startDate: 0,
         logo: 'placeholder',
+        techStack: [],
         deploymentHref: '',
         endDate: 0,
         colorID: 'devLogs',
@@ -96,31 +109,33 @@ const projects: Array<Project> = [
         fullDescription: '[Under construction]'
     }, {
         title: 'Drone Buzz',
-        shortDescription: 'E2E Encrypted Messaging App',
+        shortDescription: 'Be a drone / Survive',
         flags: ['live', 'src', 'v1'],
         srcHref: 'https://github.com/undefined1raven/DroneBuzz',
         deploymentHref: 'https://dronebuzz.vercel.app',
         startDate: 0,
         endDate: 0,
-        chapters: [{ title: 'about', content: AboutTemplate }],
+        chapters: [{ title: 'About', content: AboutTemplate, id: 'about' }],
         logo: MainMenuDeco,
         logoProps: { width: '100%', height: '90%' },
         colorID: 'droneBuzz',
         projectID: '',
+        techStack: [],
         fullDescription: `Drone Buzz is a mobile single player game that lets you control a drone while trying to survive enemy drones or complete objectives. The game is projected on a real-world map so you could visit places you know in real life and to make it more interesting. You can choose between different loadouts and get access to powerful scorestreaks like UAVs and enemy missile disruptors as you survive for longer.`
     },
     {
         title: 'Spider Eyes',
-        shortDescription: 'E2E Encrypted Messaging App',
+        shortDescription: 'Dream Logbook',
         flags: ['src', 'dep'],
         startDate: 0,
         srcHref: 'https://github.com/undefined1raven/SpiderEyes',
         endDate: 0,
         deploymentHref: '',
         logo: 'placeholder',
-        colorID: 'ringRelay',
-        chapters: [{ title: 'about', content: AboutTemplate }],
+        colorID: 'spiderEyes',
+        chapters: [{ title: 'About', content: AboutTemplate, id: 'about' }],
         projectID: '',
+        techStack: [],
         fullDescription: `Spider Eyes is a dream logging app that allows users to log various aspects of their dreams. Some of these aspects are feelings experienced, realism, dream types and more. The user can also use custom content tags to associate with each dream. There is also a dashboard that shows different stats about all of the logs [In progress]. For this project, I've used the Nuxt framework and Node for the backend. I used Vercel to deploy both the frontend and backend. The backend is composed of multiple functions that use Vercel's serverless feature. Currently working on adapting it for mobile.`
     }
 ];

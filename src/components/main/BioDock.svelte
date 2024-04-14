@@ -49,6 +49,14 @@
 		text="undefined1raven.dev"
 	></Label>
 	<Label
+		transitions={getTransition(6, undefined, 'x')}
+		fontType="soft"
+		desktopFont={$globalStyle.mediumDesktopFont}
+		figmaImportConfig={containerConfig}
+		figmaImport={{ desktop: { left: 14, top: 225 } }}
+		text="undefined1raven.dev"
+	></Label>
+	<Label
 		transitions={getTransition(6)}
 		color={$globalStyle.secondaryMono}
 		desktopFont={$globalStyle.mediumDesktopFont}

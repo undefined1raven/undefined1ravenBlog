@@ -16,6 +16,7 @@
 	import ListItem from '../common/ListItem.svelte';
 	import VerticalLine from '../common/VerticalLine.svelte';
 	import GithubLogo from '../deco/githubLogo.svelte';
+	import { selectedChapter } from './selectedChapter';
 	let topContainerConfig = {};
 	let componentsContainer = { containerHeight: 679, containerWidth: 339 };
 
@@ -53,8 +54,16 @@
 		figmaImport={{ desktop: { top: 35, left: '0', width: '99%', height: 632 } }}
 	>
 		{#each $selectedProject.chapters as chapter, ix}
-			<ListItem transitions={getTransition(ix, undefined, 'x')} width="100%" height="8%"
+			<ListItem
+				marginBottom="3%"
+				transitions={getTransition(ix, undefined, 'x')}
+				width="100%"
+				height="8%"
 				><Button
+					isSelected={$selectedChapter.title === chapter.title}
+					onClick={() => {
+						selectedChapter.set(chapter);
+					}}
 					hoverOpacityMin={10}
 					hoverOpacityMax={20}
 					align="left"

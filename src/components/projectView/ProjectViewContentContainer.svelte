@@ -35,11 +35,11 @@
 	figmaImportConfig={topContainerConfig}
 >
 	<Label
-		text="About"
+		text={$selectedChapter.title}
 		desktopFont={$globalStyle.mediumDesktopFont}
 		figmaImportConfig={topContainerConfig}
 		figmaImport={{ desktop: { top: '0', left: '0', width: 'auto', height: 46 } }}
-		style="padding-right: 10%; padding-left: 1%;"
+		style="padding-right: 10%; padding-left: 1%; transition: all linear 0.1s;"
 		backgroundColor="{$globalStyle.activeColor}10"
 		borderRadius={$globalStyle.borderRadius}
 	></Label>
