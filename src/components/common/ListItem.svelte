@@ -117,7 +117,7 @@
 			: ''}; {horizontalCenter || verticalCenter
 			? `transform: translateX(${horizontalCenter == true ? '-50%' : '0px'}) translateY(${
 					verticalCenter == true ? '-50%' : '0px'
-			  });`
+				});`
 			: ''}; background-color: {backgroundColor !== undefined ? backgroundColor : '#FFFFFF00'};
 			margin-top: {iu(marginTop, '0%')};
 			margin-bottom: {iu(marginBottom, '0%')};
@@ -132,6 +132,7 @@
 			100) *
 			lscreenSize.height +
 			'px;'};
+			min-height: {height};
 			 {style}"
 	>
 		<slot />

@@ -8,13 +8,17 @@ import ArcLogo from "../components/deco/ARCLogo.svelte";
 import MainMenuDeco from "../components/deco/DronebuzzLogo.svelte";
 import FrontendLogo from "../components/deco/FrontendLogo.svelte";
 import TechstackTemplate from "../components/content/templates/TechstackTemplate.svelte";
+import BackendLogo from "../components/deco/BackendLogo.svelte";
+import DatabasesLogo from "../components/deco/DatabasesLogo.svelte";
 
 type Chapter = { title: string, content: SvelteComponent, id: 'about' | 'status' | '3rdParty' | 'tech' | 'features' };
 type Flag = 'live' | 'src' | 'dev' | 'dep' | 'v1' | 'docs';
 type StackMember = { title: string, name: string, deco: SvelteComponent | 'default' }
-type StackComponent = { title: string, deco: SvelteComponent | 'default', members: Array<StackMember> };
+type StackComponent = { title: string, deco: SvelteComponent | 'default', members: Array<StackMember>, decoProps?: Object };
 
-const frontendStackComponentDefaults: StackComponent = { title: 'Front-end', deco: FrontendLogo, members: [] }
+const frontendStackComponentDefaults: StackComponent = { title: 'Front-end', deco: FrontendLogo, members: [], decoProps: {} }
+const backendStackComponentDefaults: StackComponent = { title: 'Back-end', deco: BackendLogo, members: [], decoProps: {} }
+const databasesStackComponentDefaults: StackComponent = { title: 'Databases', deco: DatabasesLogo, members: [], decoProps: {} }
 
 type Project = {
     title: string,
@@ -48,7 +52,14 @@ const projects: Array<Project> = [
         chapters: [{ title: 'About', content: AboutTemplate, id: 'about' }, { title: 'Tech Stack', content: TechstackTemplate, id: 'tech' }],
         colorID: 'ringRelay',
         projectID: 'ring-relay-v2',
-        techStack: [{ ...frontendStackComponentDefaults, members: [{ title: 'React', deco: 'default', name: 'Library' }] }],
+        techStack: [
+            { ...frontendStackComponentDefaults, members: [{ title: 'React', deco: 'default', name: 'Library' }] },
+            { ...backendStackComponentDefaults, members: [{ title: 'Vercel', deco: 'default', name: 'Platform' }] },
+            {
+                ...databasesStackComponentDefaults, members: [
+                    { title: 'Planet Scale', deco: 'default', name: 'Bulk Data' },
+                    { title: 'Firebase RTDB', deco: 'default', name: 'Auth Sessions & Misc' }]
+            }],
         fullDescription: RingRelayFullDescription
     },
     {
