@@ -6,14 +6,21 @@
 	import screenSize from '../../stores/screenSize';
 	import Box from '../common/Box.svelte';
 	import Label from '../common/Label.svelte';
+	import Button from '../common/Button.svelte';
 	import BioDeco from '../deco/BioDeco.svelte';
+	import GithubLogo from '../deco/githubLogo.svelte';
+	import LinkedLogo from '../deco/linkedLogo.svelte';
+	import { hasLoaded } from '../../stores/hasLoaded';
+	import EmailDeco from '../deco/EmailDeco.svelte';
 	type ContainerConfig = { containerHeight: number | string; containerWidth: number | string };
 	$: isMini = $screenSize.width < desktopBreakpoints.first;
-
+	$: socialBoxWidth = isMini ? 150 : 65;
 	$: containerConfig = {
 		containerHeight: 586,
 		containerWidth: isMini ? 1800 : 707
 	};
+	let showClipboardLabel = false;
+	$: transitionDelay = $hasLoaded ? 1 : 150;
 </script>
 
 <Box
@@ -32,7 +39,9 @@
 	<Box width="100%" height="100%" backdropFilter="blur(0px)"></Box>
 	<Box
 		borderColor={$globalStyle.inactiveColor}
-		transitions={{ in: { func: fly, options: { x: '2%', duration: 200, delay: 250 } } }}
+		transitions={{
+			in: { func: fly, options: { x: '2%', duration: 200, delay: $hasLoaded ? 1 : 250 } }
+		}}
 		style="overflow: hidden; right: 2%; box-shadow: 0px 0px 12px {$globalStyle.inactiveColor};"
 		figmaImport={{ desktop: { top: 28, left: 'auto', width: 'auto', height: 'auto' } }}
 		width="15vh"
@@ -40,6 +49,65 @@
 		backgroundColor="{$globalStyle.activeColor}00"
 		><img alt="Selfie" style="user-select: none;" width="100%" height="auto" src="/pic.webp" /></Box
 	>
+	<Box
+		transitions={getTransition(1, transitionDelay)}
+		figmaImportConfig={containerConfig}
+		figmaImport={{ desktop: { left: 17, top: 113, width: socialBoxWidth, height: 45 } }}
+		><a target="_blank" style="width: 100%; height: 100%;" href="https://github.com/undefined1raven"
+			><Button width="100%" height="100%" hoverOpacityMin={0} hoverOpacityMax={20}>
+				<GithubLogo width="90%" height="50%" />
+			</Button></a
+		></Box
+	>
+	<Box
+		transitions={getTransition(3, transitionDelay)}
+		figmaImportConfig={containerConfig}
+		figmaImport={{
+			desktop: { left: isMini ? 367 : 169, top: 113, width: socialBoxWidth, height: 45 }
+		}}
+		><a
+			target="_blank"
+			style="width: 100%; height: 100%;"
+			href="https://linkedin.com/in/dominic-zlat"
+			><Button width="100%" height="100%" hoverOpacityMin={0} hoverOpacityMax={20}>
+				<LinkedLogo width="90%" height="50%" />
+			</Button></a
+		></Box
+	>
+	<Box
+		transitions={getTransition(2, transitionDelay)}
+		figmaImportConfig={containerConfig}
+		figmaImport={{
+			desktop: { left: isMini ? 195 : 93, top: 113, width: socialBoxWidth, height: 45 }
+		}}
+		><Button
+			onClick={() => {
+				showClipboardLabel = true;
+				setTimeout(() => {
+					showClipboardLabel = false;
+				}, 2000);
+				navigator.clipboard.writeText('undefined.halt499@passinbox.com');
+			}}
+			width="100%"
+			height="100%"
+			hoverOpacityMin={0}
+			hoverOpacityMax={20}
+		>
+			<EmailDeco width="50%" height="50%" />
+		</Button></Box
+	>
+	{#if showClipboardLabel}
+		<Label
+			transitions={getTransition(1, 20, 'x')}
+			left="2%"
+			top="29%"
+			text="Copied to clipboard"
+			backgroundColor="{$globalStyle.successColor}20"
+			color={$globalStyle.successColor}
+			width="30%"
+			desktopFont={$globalStyle.verySmallDesktopFont}
+		></Label>
+	{/if}
 	<Label
 		transitions={getTransition(5)}
 		style="letter-spacing: 0.2vh"

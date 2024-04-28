@@ -37,13 +37,25 @@
 	function onMinimizedChange(isMini) {
 		if (isMini === false) {
 			isExtended = true;
-		}else{
+		} else {
 			isExtended = false;
 		}
 	}
 
 	function onIsExtendedChange(isExtended) {
 		isMenuExtended.set(isExtended);
+	}
+
+	function getVerticalLineLeft(isExtended, isMini) {
+		if (isMini === false) {
+			return 383;
+		} else {
+			if (isExtended === true) {
+				return 683;
+			} else {
+				return 142;
+			}
+		}
 	}
 	export { topContainerConfig };
 </script>
@@ -72,7 +84,14 @@
 <VerticalLine
 	figmaImportConfig={topContainerConfig}
 	color={$globalStyle.activeColor}
-	figmaImport={{ desktop: { top: 153, left: isExtended ? 383 : 142, height: 679, width: 1 } }}
+	figmaImport={{
+		desktop: {
+			top: 153,
+			left: getVerticalLineLeft(isExtended, $screenSize.minimized),
+			height: 679,
+			width: 1
+		}
+	}}
 ></VerticalLine>
 <Box
 	style="transition: transform 0.3s linear;"
@@ -98,7 +117,14 @@
 
 	<List
 		figmaImportConfig={componentsContainer}
-		figmaImport={{ desktop: { top: 35, left: '0', width: '99%', height: 632 } }}
+		figmaImport={{
+			desktop: {
+				top: 35,
+				left: '0',
+				width: isExtended && $screenSize.minimized ? '180%' : '99%',
+				height: 632
+			}
+		}}
 	>
 		{#each $selectedProject.chapters as chapter, ix}
 			<ListItem
@@ -109,6 +135,9 @@
 				><Button
 					isSelected={$selectedChapter.title === chapter.title}
 					onClick={() => {
+						if ($screenSize.minimized && isExtended === true) {
+							isExtended = false;
+						}
 						selectedChapter.set(chapter);
 					}}
 					hoverOpacityMin={10}
@@ -135,12 +164,14 @@
 			></Label>
 		{/if}
 		<Button
+			backdropFilter="blur(15px)"
 			onClick={() => {
 				isExtended = !isExtended;
 			}}
+			style="z-index: 100"
 			width="25%"
 			top="91.7%"
-			left={isExtended ? '75%' : '155%'}
+			left={isExtended ? '161%' : '195%'}
 			hoverOpacityMin={0}
 			hoverOpacityMax={20}
 			height="8%"

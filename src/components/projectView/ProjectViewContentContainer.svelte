@@ -20,9 +20,9 @@
 	import { isMenuExtended } from './isMenuExtended';
 	import isMobile from '../../fn/isMobile';
 	let topContainerConfig = {};
-	let componentsContainer = {
+	$: componentsContainer = {
 		containerHeight: 679,
-		containerWidth: $screenSize.minimized ? 1200 : 898
+		containerWidth: $screenSize.minimized ? 1250 : 898
 	};
 
 	export { topContainerConfig };
@@ -52,7 +52,8 @@
 		<Box
 			figmaImportConfig={componentsContainer}
 			figmaImport={{ desktop: { top: 63, left: '0', width: '100%', height: 616 } }}
-			><svelte:component this={$selectedChapter.content}></svelte:component></Box
 		>
+			<svelte:component this={$selectedChapter.content}></svelte:component>
+		</Box>
 	</Box>
 {/if}

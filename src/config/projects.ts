@@ -11,6 +11,7 @@ import TechstackTemplate from "../components/content/templates/TechstackTemplate
 import BackendLogo from "../components/deco/BackendLogo.svelte";
 import DatabasesLogo from "../components/deco/DatabasesLogo.svelte";
 import { logoSources } from "./logoSources";
+import VercelLogo from "../components/deco/VercelLogo.svelte";
 
 type Chapter = { title: string, content: SvelteComponent, id: 'about' | 'status' | '3rdParty' | 'tech' | 'features' };
 type Flag = 'live' | 'src' | 'dev' | 'dep' | 'v1' | 'docs';
@@ -55,7 +56,7 @@ const projects: Array<Project> = [
         projectID: 'ring-relay-v2',
         techStack: [
             { ...frontendStackComponentDefaults, members: [{ title: 'React', deco: logoSources.react, name: 'Library' }] },
-            { ...backendStackComponentDefaults, members: [{ title: 'Vercel', deco: 'default', name: 'Platform' }] },
+            { ...backendStackComponentDefaults, members: [{ title: 'Vercel', deco: VercelLogo, name: 'Platform' }] },
             {
                 ...databasesStackComponentDefaults, members: [
                     { title: 'Planet Scale', deco: logoSources.planetScale, name: 'Bulk Data' },

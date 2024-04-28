@@ -14,11 +14,9 @@
 
 	const defaultStackComponentDecoProps = { height: '70%' };
 	const defaultComponentMemberDecoProps = { height: '70%', left: '23%' };
-
-	$: containerWidth = $screenSize.minimized ? '95%' : '80%';
 </script>
 
-<List width={containerWidth} left="0%" height="95%">
+<List width="90%" left="0%" height="95%">
 	{#each $selectedProject.techStack as stackComponent, ix}
 		<ListItem
 			style="min-height: 40%;"
@@ -28,7 +26,13 @@
 			marginBottom="5%"
 		>
 			{#if ix !== 0 && ix <= $selectedProject.techStack.length - 1}
-				<Box top="-18%" width="2vh" height="4vh" left="50%" horizontalCenter={true}>
+				<Box
+					top={$screenSize.minimized ? '-15%' : '-18%'}
+					width="2vh"
+					height={$screenSize.minimized ? '2vh' : '4vh'}
+					left="50%"
+					horizontalCenter={true}
+				>
 					<NetworkDeco width="100%" height="100%"></NetworkDeco>
 				</Box>
 			{/if}

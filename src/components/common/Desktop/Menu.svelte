@@ -27,9 +27,9 @@
 	$: isMini = $screenSize.width < desktopBreakpoints.first;
 
 	const hashToMenuArray = {
-		'#main': [mainButton, techTreeButton, contactButton],
-		'#contact': [mainButton, techTreeButton, contactButton],
-		'#projectView': [projectViewBackButton, mainButton, techTreeButton, contactButton]
+		'#main': [mainButton, contactButton],
+		'#contact': [mainButton, contactButton],
+		'#projectView': [projectViewBackButton, mainButton, contactButton]
 	};
 
 	function onHashChange(windowHash) {
@@ -40,11 +40,16 @@
 
 	$: onHashChange($windowHash);
 
+	$: hashToMenuParams = {
+		'#main': { classic: isMini ? 300 : 158, back: isMini ? 350 : 228 },
+		'#projectView': { classic: isMini ? 370 : 158, back: isMini ? 400 : 228 }
+	};
+
 	function getButtonWidth(menuButton: MenuButton, isMini) {
 		if (menuButton.type === 'classic') {
-			return isMini ? 300 : 158;
+			return hashToMenuParams[$windowHash].classic;
 		} else {
-			return isMini ? 350 : 228;
+			return hashToMenuParams[$windowHash].back;
 		}
 	}
 
