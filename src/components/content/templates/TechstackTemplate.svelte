@@ -1,19 +1,24 @@
 <script lang="ts">
 	import { getTransition } from '../../../fn/getTransisitions';
 	import globalStyle from '../../../stores/globalStyles';
+	import screenSize from '../../../stores/screenSize';
 	import { selectedProject } from '../../../stores/selectedProject';
 	import Box from '../../common/Box.svelte';
 	import HorizontalLine from '../../common/HorizontalLine.svelte';
 	import Label from '../../common/Label.svelte';
 	import List from '../../common/List.svelte';
 	import ListItem from '../../common/ListItem.svelte';
+	import VerticalLine from '../../common/VerticalLine.svelte';
+	import NetworkDeco from '../../deco/NetworkDeco.svelte';
 	import PlaceholderLogo from '../../deco/PlaceholderLogo.svelte';
 
 	const defaultStackComponentDecoProps = { height: '70%' };
 	const defaultComponentMemberDecoProps = { height: '70%', left: '23%' };
+
+	$: containerWidth = $screenSize.minimized ? '95%' : '80%';
 </script>
 
-<List width="80%" left="0%" height="95%">
+<List width={containerWidth} left="0%" height="95%">
 	{#each $selectedProject.techStack as stackComponent, ix}
 		<ListItem
 			style="min-height: 40%;"
@@ -22,6 +27,11 @@
 			height="40%"
 			marginBottom="5%"
 		>
+			{#if ix !== 0 && ix <= $selectedProject.techStack.length - 1}
+				<Box top="-18%" width="2vh" height="4vh" left="50%" horizontalCenter={true}>
+					<NetworkDeco width="100%" height="100%"></NetworkDeco>
+				</Box>
+			{/if}
 			<Box width="100%" height="100%" borderColor={$globalStyle.activeColor}>
 				<Label
 					top="0%"
@@ -55,30 +65,43 @@
 								left="0%"
 								top="50%"
 								color="#00000000"
-								style="background-image: linear-gradient(90deg, {$globalStyle.activeColor} 0%,{$globalStyle.activeColor}20 100%);background-position: center center;"
+								style="background-image: linear-gradient(90deg, {$globalStyle.activeColor} 0%,{$globalStyle.activeColor}10 100%);background-position: center center;"
 							></HorizontalLine>
 							<Label
+								fontType="soft"
 								left="10%"
 								width="30%"
-								height="100%"
-								text="/ {componentMember.name}"
+								height="80%"
+								text={componentMember.name}
 								align="left"
 								alignPadding="2%"
-								desktopFont={$globalStyle.smallDesktopFont}
-								backgroundColor="{$globalStyle.activeColor}20"
+								desktopFont={$globalStyle.mediumDesktopFont}
 								style="border-right-top-radius: 0px; border-right-bottom-radius: 0px;"
 							></Label>
-							<Box left="42%" height="5vh" width="5vh">
-								<svelte:component
-									this={componentMember.deco === 'default' ? PlaceholderLogo : componentMember.deco}
-									{...defaultComponentMemberDecoProps}
-								></svelte:component>
-							</Box>
 							<Label
-								left="52%"
-								desktopFont={$globalStyle.smallDesktopFont}
+								fontType="soft"
+								left="45%"
+								desktopFont={$globalStyle.mediumDesktopFont}
 								text={componentMember.title}
 							></Label>
+							<Box
+								left="10%"
+								height="90%"
+								width="80%"
+								backgroundColor="{$globalStyle.activeColor}10"
+							></Box>
+							<VerticalLine height="80%" left="43%" color={$globalStyle.activeColor}></VerticalLine>
+							<Box style="right: 12%;" height="5vh" width="5vh">
+								{#if componentMember.deco === 'default'}
+									<svelte:component this={PlaceholderLogo} left="0%" height="80%"
+									></svelte:component>
+								{:else}
+									<img
+										style="position: absolute; height: 70%; width: auto; display: flex; align-items: center; justify-content: center;"
+										src={componentMember.deco}
+									/>
+								{/if}
+							</Box>
 						</ListItem>
 					{/each}
 				</List>

@@ -13,8 +13,11 @@
 	import PlaceholderLogo from '../deco/PlaceholderLogo.svelte';
 
 	let topContainerConfig = {};
-	let componentsContainer = { containerHeight: 100, containerWidth: 458 };
-	export { topContainerConfig };
+	let componentsContainer = {
+		containerHeight: 100,
+		containerWidth: $screenSize.minimized ? 558 : 458
+	};
+	export { topContainerConfig, componentsContainer };
 </script>
 
 <Box
@@ -23,7 +26,7 @@
 			width: componentsContainer.containerWidth,
 			height: componentsContainer.containerHeight,
 			left: 12,
-			top: 8
+			top: $screenSize.minimized ? '-1.5%' : 8
 		}
 	}}
 	figmaImportConfig={topContainerConfig}
@@ -46,6 +49,13 @@
 		align="left"
 		desktopFont={$globalStyle.veryLargeDesktopFont}
 		figmaImportConfig={componentsContainer}
-		figmaImport={{ desktop: { height: '100%', left: 116, width: 332, top: '0' } }}
+		figmaImport={{
+			desktop: {
+				height: '100%',
+				left: $screenSize.minimized ? 160 : 116,
+				width: $screenSize.minimized ? 500 : 332,
+				top: '0'
+			}
+		}}
 	></Label>
 </Box>

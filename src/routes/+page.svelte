@@ -10,6 +10,7 @@
 	import screenSize from '../stores/screenSize';
 	import { desktopBreakpoints } from '../config/screenBreakpoints';
 	import ProjectViewMain from '../components/projectView/ProjectViewMain.svelte';
+	import { hasLoaded } from '../stores/hasLoaded';
 	let blurFilterVal = 10;
 
 	const allowedHashes = ['main', 'contact', 'tree', 'projectView'];
@@ -17,6 +18,7 @@
 	onMount(() => {
 		setInterval(() => {
 			if (blurFilterVal > 0) blurFilterVal--;
+			if (blurFilterVal === 0) hasLoaded.set(true);
 		}, 20);
 	});
 

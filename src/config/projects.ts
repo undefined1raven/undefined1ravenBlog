@@ -10,6 +10,7 @@ import FrontendLogo from "../components/deco/FrontendLogo.svelte";
 import TechstackTemplate from "../components/content/templates/TechstackTemplate.svelte";
 import BackendLogo from "../components/deco/BackendLogo.svelte";
 import DatabasesLogo from "../components/deco/DatabasesLogo.svelte";
+import { logoSources } from "./logoSources";
 
 type Chapter = { title: string, content: SvelteComponent, id: 'about' | 'status' | '3rdParty' | 'tech' | 'features' };
 type Flag = 'live' | 'src' | 'dev' | 'dep' | 'v1' | 'docs';
@@ -53,12 +54,12 @@ const projects: Array<Project> = [
         colorID: 'ringRelay',
         projectID: 'ring-relay-v2',
         techStack: [
-            { ...frontendStackComponentDefaults, members: [{ title: 'React', deco: 'default', name: 'Library' }] },
+            { ...frontendStackComponentDefaults, members: [{ title: 'React', deco: logoSources.react, name: 'Library' }] },
             { ...backendStackComponentDefaults, members: [{ title: 'Vercel', deco: 'default', name: 'Platform' }] },
             {
                 ...databasesStackComponentDefaults, members: [
-                    { title: 'Planet Scale', deco: 'default', name: 'Bulk Data' },
-                    { title: 'Firebase RTDB', deco: 'default', name: 'Auth Sessions & Misc' }]
+                    { title: 'Planet Scale', deco: logoSources.planetScale, name: 'Bulk Data' },
+                    { title: 'Firebase RTDB', deco: logoSources.firebase, name: 'Auth Sessions & Misc' }]
             }],
         fullDescription: RingRelayFullDescription
     },
@@ -72,9 +73,23 @@ const projects: Array<Project> = [
         deploymentHref: 'https://ankaryn.online',
         srcHref: 'https://github.com/undefined1raven/arc',
         endDate: 0,
-        chapters: [{ title: 'About', content: AboutTemplate, id: 'about' }],
+        chapters: [{ title: 'About', content: AboutTemplate, id: 'about' }, { title: 'Tech Stack', content: TechstackTemplate, id: 'tech' }],
         colorID: 'arc',
-        techStack: [],
+        techStack: [
+            {
+                ...frontendStackComponentDefaults, members: [{ title: 'Svelte', deco: logoSources.react, name: 'Library' },
+                { title: 'Custom Component Lib', deco: 'default', name: 'UI Library' }]
+            },
+            {
+                ...backendStackComponentDefaults, members: [{ title: 'Vercel', deco: 'default', name: 'Platform' },
+                { title: 'Axiom', deco: 'default', name: 'Logs & Monitoring' }
+                ]
+            },
+            {
+                ...databasesStackComponentDefaults, members: [
+                    { title: 'Turso', deco: logoSources.turso, name: 'Bulk Data' },
+                    { title: 'Firebase RTDB', deco: logoSources.firebase, name: 'Auth Sessions & Misc' }]
+            }],
         projectID: 'sys_ctl_arc',
         fullDescription: `Arc is a mobile app that allows anyone to track and plan many aspects of our daily lives. The app
         doesn't require an email/password pair to sign up, but it's rather using a one-click sign up flow by using

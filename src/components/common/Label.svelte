@@ -112,7 +112,7 @@
 			} else {
 				fontSize = '18px';
 			}
-			if (clientWidth < 700 && rawFontSize && !isMobile()) {
+			if ($screenSize.minimized && rawFontSize && !isMobile()) {
 				fontSize = parseFloat(rawFontSize - RangeScaler(rawFontSize, 10, 48, 0, 18)) + 'px';
 			}
 		}

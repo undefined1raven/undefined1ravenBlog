@@ -24,10 +24,14 @@
 	onMount(() => {
 		selectedChapter.set($selectedProject.chapters[0]);
 	});
+
+	$: projectViewWidth = $screenSize.width < desktopBreakpoints.first ? 1800 : 1329;
 </script>
 
 <Box
-	figmaImport={{ desktop: { width: 1329, height: 859, left: '50%', top: 127 } }}
+	figmaImport={{
+		desktop: { width: projectViewWidth, height: 859, left: '50%', top: 127 }
+	}}
 	horizontalCenter={true}
 	backgroundColor="{$globalStyle.activeColor}07"
 >
@@ -45,7 +49,7 @@
 		figmaImport={{
 			desktop: {
 				left: '0',
-				top: $screenSize.minimized ? -70 : containerConfig.containerHeight + 9,
+				top: containerConfig.containerHeight + 9,
 				width: $screenSize.minimized ? 220 : 101,
 				height: 25
 			}
@@ -64,7 +68,7 @@
 		figmaImport={{
 			desktop: {
 				left: $screenSize.minimized ? 250 : 120,
-				top: $screenSize.minimized ? -70 : containerConfig.containerHeight + 9,
+				top: containerConfig.containerHeight + 9,
 				width: $screenSize.minimized ? 220 : 101,
 				height: 25
 			}
@@ -83,7 +87,7 @@
 		figmaImport={{
 			desktop: {
 				left: '0',
-				top: $screenSize.minimized ? -38 : containerConfig.containerHeight + 43,
+				top: containerConfig.containerHeight + 43,
 				width: $screenSize.minimized ? 220 : 101,
 				height: 25
 			}
@@ -102,7 +106,7 @@
 		figmaImport={{
 			desktop: {
 				left: $screenSize.minimized ? 250 : 120,
-				top: $screenSize.minimized ? -38 : containerConfig.containerHeight + 43,
+				top: containerConfig.containerHeight + 43,
 				width: $screenSize.minimized ? 220 : 101,
 				height: 25
 			}

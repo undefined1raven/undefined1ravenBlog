@@ -17,23 +17,70 @@
 	import VerticalLine from '../common/VerticalLine.svelte';
 	import GithubLogo from '../deco/githubLogo.svelte';
 	import { selectedChapter } from './selectedChapter';
+	import DropdownDeco from '../deco/DropdownDeco.svelte';
+	import { isMenuExtended } from './isMenuExtended';
 	let topContainerConfig = {};
 	let componentsContainer = { containerHeight: 679, containerWidth: 339 };
 
+	$: selectedChapterIndex = getSelectedChapterIndex($selectedChapter);
+
+	function getSelectedChapterIndex(selectedChapter) {
+		if (selectedChapter !== undefined) {
+			return $selectedProject.chapters.findIndex((elm) => elm.id === selectedChapter.id);
+		} else {
+			return -1;
+		}
+	}
+	$: isExtended = true;
+	$: onMinimizedChange($screenSize.minimized);
+	$: onIsExtendedChange(isExtended);
+	function onMinimizedChange(isMini) {
+		if (isMini === false) {
+			isExtended = true;
+		}else{
+			isExtended = false;
+		}
+	}
+
+	function onIsExtendedChange(isExtended) {
+		isMenuExtended.set(isExtended);
+	}
 	export { topContainerConfig };
 </script>
 
+<svelte:window
+	on:keyup={(e) => {
+		if (selectedChapterIndex !== -1) {
+			if (e.key === 'ArrowUp') {
+				if (selectedChapterIndex < $selectedProject.chapters.length - 1) {
+					selectedChapter.set($selectedProject.chapters[selectedChapterIndex + 1]);
+				} else {
+					selectedChapter.set($selectedProject.chapters[0]);
+				}
+			}
+			if (e.key === 'ArrowDown') {
+				if (selectedChapterIndex > 0) {
+					selectedChapter.set($selectedProject.chapters[selectedChapterIndex - 1]);
+				} else {
+					const chaptersLen = $selectedProject.chapters.length;
+					selectedChapter.set($selectedProject.chapters[chaptersLen - 1]);
+				}
+			}
+		}
+	}}
+/>
 <VerticalLine
 	figmaImportConfig={topContainerConfig}
 	color={$globalStyle.activeColor}
-	figmaImport={{ desktop: { top: 153, left: 383, height: 679, width: 1 } }}
+	figmaImport={{ desktop: { top: 153, left: isExtended ? 383 : 142, height: 679, width: 1 } }}
 ></VerticalLine>
 <Box
+	style="transition: transform 0.3s linear;"
 	figmaImport={{
 		desktop: {
 			width: componentsContainer.containerWidth,
 			height: componentsContainer.containerHeight,
-			left: 22,
+			left: isExtended ? 22 : -500,
 			top: 153
 		}
 	}}
@@ -77,4 +124,31 @@
 			>
 		{/each}
 	</List>
+	{#if $screenSize.minimized === true}
+		{#if !isExtended}
+			<Label
+				text="View Chapters"
+				left="118%"
+				height="10%"
+				width="90%"
+				style="transform: rotate(-90deg); white-space: nowrap;"
+			></Label>
+		{/if}
+		<Button
+			onClick={() => {
+				isExtended = !isExtended;
+			}}
+			width="25%"
+			top="91.7%"
+			left={isExtended ? '75%' : '155%'}
+			hoverOpacityMin={0}
+			hoverOpacityMax={20}
+			height="8%"
+			><DropdownDeco
+				width="70%"
+				height="70%"
+				style="transform: rotate({isExtended ? '0deg' : '-180deg'});"
+			></DropdownDeco></Button
+		>
+	{/if}
 </Box>

@@ -17,7 +17,10 @@
 	import GithubLogo from '../deco/githubLogo.svelte';
 	import { onDestroy, onMount } from 'svelte';
 	let topContainerConfig = {};
-	let componentsContainer = { containerHeight: 71, containerWidth: 570 };
+	$: componentsContainer = {
+		containerHeight: 71,
+		containerWidth: $screenSize.minimized ? 1270 : 570
+	};
 
 	const filteredProjectFlags = $selectedProject.flags.filter(
 		(elm) => elm === 'docs' || elm === 'src' || elm === 'live'
@@ -42,6 +45,9 @@
 		}
 	});
 
+	$: quickLinksContainerLeft = $screenSize.minimized ? '-1.5%' : 742;
+	$: quickLinksContainerTop = $screenSize.minimized ? 55 : 8;
+
 	export { topContainerConfig };
 </script>
 
@@ -50,14 +56,14 @@
 		desktop: {
 			width: componentsContainer.containerWidth,
 			height: componentsContainer.containerHeight,
-			left: 742,
-			top: 8
+			left: quickLinksContainerLeft,
+			top: quickLinksContainerTop
 		}
 	}}
 	figmaImportConfig={topContainerConfig}
 >
 	<List
-		style="justify-content: flex-end; overflow: visible;"
+		style="justify-content: {$screenSize.minimized ? 'flex-start' : 'flex-end'}; overflow: visible;"
 		direction="row"
 		figmaImportConfig={componentsContainer}
 		figmaImport={{ desktop: { top: 35, left: '0', width: '100%', height: 36 } }}
@@ -67,7 +73,7 @@
 				<ListItem
 					transitions={getTransition(ix)}
 					height="100%"
-					width="35%"
+					width={$screenSize.minimized ? '20%' : '35%'}
 					style="margin-right: 3%; margin-left: 3%;"
 					><a
 						style="padding: 0; margin: 0; position: absolute; width: 100%; height: 100%;"
@@ -78,7 +84,7 @@
 							desktopFont={$globalStyle.smallDesktopFont}
 							width="100%"
 							height="100%"
-							label="Live deployment"
+							label={$screenSize.minimized ? 'Live' : 'Live deployment'}
 							align="left"
 							color={$globalStyle.successColor}
 							borderColor={$globalStyle.successColor}
@@ -132,7 +138,7 @@
 							desktopFont={$globalStyle.smallDesktopFont}
 							width="100%"
 							height="100%"
-							label="Source"
+							label={$screenSize.minimized ? 'src' : 'Source'}
 							align="left"
 							style="border-top: none; border-bottom: none;"
 							alignPadding="5%"><GithubLogo height="70%" style="right: -4%;"></GithubLogo></Button

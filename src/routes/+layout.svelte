@@ -14,7 +14,7 @@
 	import windowHash from '../stores/windowHash';
 	import TopDecoBar from '../components/common/TopDecoBar.svelte';
 	import { selectedProject } from '../stores/selectedProject';
-
+	let menuFlickr = true;
 	function onColorSchemeIDChange(colorID: colorIDs) {
 		let stylesOverride = appColors[colorID];
 		if (stylesOverride !== undefined) {
@@ -31,8 +31,16 @@
 	function onHashChange(windowHash) {
 		if (windowHash === '#projectView') {
 			activeColorSchemeID.set($selectedProject.colorID);
+			menuFlickr = false;
+			setTimeout(() => {
+				menuFlickr = true;
+			}, 40);
 		} else {
+			menuFlickr = false;
 			activeColorSchemeID.set('main');
+			setTimeout(() => {
+				menuFlickr = true;
+			}, 40);
 		}
 	}
 
@@ -53,8 +61,8 @@
 		},
 		'#projectView': {
 			top: isMini ? 64 : 64,
-			left: isMini ? 296 : 296,
-			width: isMini ? 847 : 847
+			left: isMini ? 55 : 296,
+			width: isMini ? 2000 : 847
 		},
 		'#tree': {
 			top: isMini ? 64 : 64,
@@ -81,6 +89,8 @@
 	}}
 /> -->
 <ToolTip show={$toolTipState.show} text={$toolTipState.text} />
-<Menu {...menuProps[$windowHash]}></Menu>
+{#if menuFlickr}
+	<Menu {...menuProps[$windowHash]}></Menu>
+{/if}
 <TopDecoBar></TopDecoBar>
 <slot />

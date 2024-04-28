@@ -19,6 +19,7 @@
 		projectViewBackButton,
 		techTreeButton
 	} from '../../../config/menuButtons';
+	import { hasLoaded } from '../../../stores/hasLoaded';
 	let top = 144;
 	let left = 339;
 	let height = 45;
@@ -55,6 +56,10 @@
 		}
 	}
 
+	function getMenuHotkeysTransition(ix) {
+		return ix * 1.2 + 3;
+	}
+
 	export { top, left, width, height };
 </script>
 
@@ -78,7 +83,7 @@
 >
 	{#each $menu as menuButton, ix}
 		<ListItem
-			transitions={getTransition(ix + 4)}
+			transitions={getTransition($hasLoaded ? ix : ix + 4)}
 			style="margin-right: 2%;"
 			height="100%"
 			figmaImportConfig={{ containerHeight: height, containerWidth: width }}
@@ -86,7 +91,7 @@
 		>
 			{#if menuButton.type === 'classic'}
 				<Label
-					transitions={getTransition(ix * 1.2 + 10)}
+					transitions={getTransition(getMenuHotkeysTransition(ix))}
 					backgroundColor="{$globalStyle.secondaryColor}20"
 					top="0%"
 					width="2vh"
@@ -111,7 +116,7 @@
 			{/if}
 			{#if menuButton.type === 'back'}
 				<Label
-					transitions={getTransition(ix * 1.2 + 10)}
+					transitions={getTransition(getMenuHotkeysTransition(ix))}
 					backgroundColor="{$globalStyle.secondaryColor}20"
 					top="0%"
 					width="4vh"
@@ -124,7 +129,7 @@
 				></Label>
 				<Button
 					style="border-top: none; border-bottom: none;"
-					label={menuButton.title}
+					label="Back"
 					desktopFont={$globalStyle.mediumDesktopFont}
 					width="100%"
 					backgroundColor={$globalStyle.activeColor}

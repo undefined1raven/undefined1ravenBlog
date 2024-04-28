@@ -17,35 +17,42 @@
 	import VerticalLine from '../common/VerticalLine.svelte';
 	import GithubLogo from '../deco/githubLogo.svelte';
 	import { selectedChapter } from './selectedChapter';
+	import { isMenuExtended } from './isMenuExtended';
+	import isMobile from '../../fn/isMobile';
 	let topContainerConfig = {};
-	let componentsContainer = { containerHeight: 679, containerWidth: 898 };
+	let componentsContainer = {
+		containerHeight: 679,
+		containerWidth: $screenSize.minimized ? 1200 : 898
+	};
 
 	export { topContainerConfig };
 </script>
 
-<Box
-	figmaImport={{
-		desktop: {
-			width: componentsContainer.containerWidth,
-			height: componentsContainer.containerHeight,
-			left: 407,
-			top: 153
-		}
-	}}
-	figmaImportConfig={topContainerConfig}
->
-	<Label
-		text={$selectedChapter.title}
-		desktopFont={$globalStyle.mediumDesktopFont}
-		figmaImportConfig={topContainerConfig}
-		figmaImport={{ desktop: { top: '0', left: '0', width: 'auto', height: 46 } }}
-		style="padding-right: 10%; padding-left: 1%; transition: all linear 0.1s;"
-		backgroundColor="{$globalStyle.activeColor}10"
-		borderRadius={$globalStyle.borderRadius}
-	></Label>
+{#if ($isMenuExtended === false && $screenSize.minimized === true) || $screenSize.minimized === false || isMobile() === true}
 	<Box
-		figmaImportConfig={componentsContainer}
-		figmaImport={{ desktop: { top: 63, left: '0', width: '100%', height: 616 } }}
-		><svelte:component this={$selectedChapter.content}></svelte:component></Box
+		figmaImport={{
+			desktop: {
+				width: componentsContainer.containerWidth,
+				height: componentsContainer.containerHeight,
+				left: $screenSize.minimized ? 165 : 407,
+				top: 153
+			}
+		}}
+		figmaImportConfig={topContainerConfig}
 	>
-</Box>
+		<Label
+			text={$selectedChapter.title}
+			desktopFont={$globalStyle.mediumDesktopFont}
+			figmaImportConfig={topContainerConfig}
+			figmaImport={{ desktop: { top: '0', left: '0', width: 'auto', height: 46 } }}
+			style="padding-right: 10%; padding-left: 1%; transition: all linear 0.1s;"
+			backgroundColor="{$globalStyle.activeColor}10"
+			borderRadius={$globalStyle.borderRadius}
+		></Label>
+		<Box
+			figmaImportConfig={componentsContainer}
+			figmaImport={{ desktop: { top: 63, left: '0', width: '100%', height: 616 } }}
+			><svelte:component this={$selectedChapter.content}></svelte:component></Box
+		>
+	</Box>
+{/if}
