@@ -5,12 +5,14 @@
 	import globalStyle from '../stores/globalStyles';
 	import Button from '../components/common/Button.svelte';
 	import Main from '../components/main/Main.svelte';
+	import MainMobile from '../components/main/mobile/MainMobile.svelte';
 	import windowHash from '../stores/windowHash';
 	import Menu from '../components/common/Desktop/Menu.svelte';
 	import screenSize from '../stores/screenSize';
 	import { desktopBreakpoints } from '../config/screenBreakpoints';
 	import ProjectViewMain from '../components/projectView/ProjectViewMain.svelte';
 	import { hasLoaded } from '../stores/hasLoaded';
+	import isMobile from '../fn/isMobile';
 	let blurFilterVal = 10;
 
 	const allowedHashes = ['main', 'contact', 'tree', 'projectView'];
@@ -42,6 +44,13 @@
 		'#projectView': ProjectViewMain
 	};
 
+	const mobileHashToComponent = {
+		'#main': MainMobile,
+		'#contact': Main,
+		'#tree': Label,
+		'#projectView': ProjectViewMain
+	};
+
 	$: onHashChange($windowHash);
 </script>
 
@@ -56,7 +65,12 @@
 	></Box>
 {/if}
 
-<svelte:component this={hashToComponent[$windowHash]}></svelte:component>
+{#if isMobile() === false}
+	<svelte:component this={hashToComponent[$windowHash]}></svelte:component>
+{/if}
+{#if isMobile() === true}
+	<svelte:component this={mobileHashToComponent[$windowHash]}></svelte:component>
+{/if}
 
 <style>
 	:global(body) {
@@ -68,5 +82,10 @@
 			rgba(8, 4, 21, 1) 68%,
 			rgba(5, 0, 20, 1) 99%
 		);
+	}
+	:global(html) {
+		width: 100%;
+		height: 100%;
+		overflow: hidden;
 	}
 </style>

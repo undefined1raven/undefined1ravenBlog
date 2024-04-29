@@ -4,6 +4,7 @@
 	import type { colorIDs } from '../stores/activeColorSchemeID';
 	import { activeColorSchemeID } from '../stores/activeColorSchemeID';
 	import ToolTip from '../components/common/ToolTip.svelte';
+	import Box from '../components/common/Box.svelte';
 	import toolTipState from '../stores/toolTipState';
 	import { onMount } from 'svelte';
 	import mousePosition from '../stores/mousePosition';
@@ -14,6 +15,8 @@
 	import windowHash from '../stores/windowHash';
 	import TopDecoBar from '../components/common/TopDecoBar.svelte';
 	import { selectedProject } from '../stores/selectedProject';
+	import isMobile from '../fn/isMobile';
+	import BioDeco from '../components/deco/BioDeco.svelte';
 	let menuFlickr = true;
 	function onColorSchemeIDChange(colorID: colorIDs) {
 		let stylesOverride = appColors[colorID];
@@ -89,8 +92,22 @@
 	}}
 /> -->
 <ToolTip show={$toolTipState.show} text={$toolTipState.text} />
-{#if menuFlickr}
+{#if menuFlickr && !isMobile()}
 	<Menu {...menuProps[$windowHash]}></Menu>
+{/if}
+{#if isMobile()}
+	<Box
+		width="85%"
+		height="90%"
+		left="56%"
+		top="50%"
+		style="opacity: 0.15; overflow: hidden;"
+		verticalCenter={true}
+		horizontalCenter={true}
+	>
+		<BioDeco width="100%" height="100%"></BioDeco>
+		<Box left="0%" width="100%" backdropFilter="blur(45px)" height="90%"></Box>
+	</Box>
 {/if}
 <TopDecoBar></TopDecoBar>
 <slot />
