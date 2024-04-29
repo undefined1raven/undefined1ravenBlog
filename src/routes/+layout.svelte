@@ -103,7 +103,7 @@
 		top="50%"
 		style="opacity: 0.15; overflow: hidden; transform: translate(-50%, -50%);"
 	></BioDeco>
-	<Box left="0%" width="100%" backdropFilter="blur(2px)" height="100%"></Box>
+	<Box left="0%" width="95%" backdropFilter="blur(2px)" height="95%"></Box>
 {/if}
 <TopDecoBar></TopDecoBar>
 <slot />
