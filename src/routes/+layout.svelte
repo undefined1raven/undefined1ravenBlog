@@ -96,18 +96,14 @@
 	<Menu {...menuProps[$windowHash]}></Menu>
 {/if}
 {#if isMobile()}
-	<Box
+	<BioDeco
 		width="85%"
 		height="90%"
 		left="56%"
 		top="50%"
-		style="opacity: 0.15; overflow: hidden;"
-		verticalCenter={true}
-		horizontalCenter={true}
-	>
-		<BioDeco width="100%" height="100%"></BioDeco>
-		<Box left="0%" width="100%" backdropFilter="blur(45px)" height="90%"></Box>
-	</Box>
+		style="opacity: 0.15; overflow: hidden; transform: translate(-50%, -50%);"
+	></BioDeco>
+	<Box left="0%" width="100%" backdropFilter="blur(2px)" height="100%"></Box>
 {/if}
 <TopDecoBar></TopDecoBar>
 <slot />
