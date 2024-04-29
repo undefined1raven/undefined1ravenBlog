@@ -49,7 +49,8 @@
 			height: itemHeight
 		}
 	}}
-	><Label
+>
+	<Label
 		figmaImportConfig={listItemContainerConfig}
 		desktopFont={$globalStyle.mediumDesktopFont}
 		figmaImport={{ desktop: { top: 11, left: 15 } }}
@@ -71,7 +72,6 @@
 		onClick={() => {
 			onProjectSelection(project);
 		}}
-		style="box-shadow: 0px 0px 4px {colors.activeColor};"
 		figmaImportConfig={listItemContainerConfig}
 		figmaImport={{ desktop: { width: '100%', height: '100%', left: '0' } }}
 		hoverOpacityMax={10}
@@ -83,7 +83,7 @@
 		style="overflow: hidden; right: 2%;"
 		direction="row"
 		figmaImportConfig={listItemContainerConfig}
-		figmaImport={{ desktop: { top: '-25%', left: 433, height: 102, width: 266 } }}
+		figmaImport={{ desktop: { top: '9%', left: 433, height: 23, width: 266 } }}
 		>{#each project.flags as flag}
 			<ProjectListItemFlagMobile {project} flagID={flag}></ProjectListItemFlagMobile>
 		{/each}</List

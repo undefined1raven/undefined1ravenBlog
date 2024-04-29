@@ -29,12 +29,12 @@
 	transitions={getTransition(ix + 2)}
 	figmaImportConfig={containerConfig}
 	figmaImport={{
-		mobile: { width: '40.406143345%', height: 23 }
+		mobile: { width: '40.406143345%', height: 150 }
 	}}
 >
 	{#if flagID === 'dev'}
 		<Label
-			borderRadius="2px"
+			borderRadius="6px"
 			width="100%"
 			height="100%"
 			text="🏗️"
@@ -47,7 +47,7 @@
 	{#if flagID === 'v1'}
 		<Label
 			desktopFont={'12px'}
-			borderRadius="2px"
+			borderRadius="6px"
 			width="100%"
 			verticalFont={'12px'}
 			height="100%"
@@ -60,9 +60,9 @@
 	{#if flagID === 'dep'}
 		<Label
 			desktopFont={'14px'}
-			borderRadius="2px"
 			width="100%"
 			verticalFont={'12px'}
+			borderRadius="6px"
 			height="100%"
 			text="🚧 dep"
 			color={flagConfig.dep.activeMono}
@@ -73,7 +73,7 @@
 	{#if flagID === 'src'}
 		<Label
 			desktopFont={'14px'}
-			borderRadius="2px"
+			borderRadius="6px"
 			width="90%"
 			height="100%"
 			text="src"
@@ -85,7 +85,7 @@
 	{#if flagID === 'live'}
 		<Label
 			desktopFont={'14px'}
-			borderRadius="2px"
+			borderRadius="6px"
 			width="90%"
 			height="100%"
 			verticalFont={'12px'}
