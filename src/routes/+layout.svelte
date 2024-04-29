@@ -18,6 +18,8 @@
 	import isMobile from '../fn/isMobile';
 	import BioDeco from '../components/deco/BioDeco.svelte';
 	import MobileMenu from '../components/common/Mobile/MobileMenu.svelte';
+	import HorizontalLine from '../components/common/HorizontalLine.svelte';
+	import MobileTopBacDeco from '../components/common/MobileTopBacDeco.svelte';
 	let menuFlickr = true;
 	function onColorSchemeIDChange(colorID: colorIDs) {
 		let stylesOverride = appColors[colorID];
@@ -106,6 +108,9 @@
 	></BioDeco>
 	<!-- <Box left="0%" width="95%" backdropFilter="blur(2px)" height="95%"></Box> -->
 	<MobileMenu></MobileMenu>
+	<MobileTopBacDeco></MobileTopBacDeco>
+{:else}
+	<TopDecoBar></TopDecoBar>
 {/if}
-<TopDecoBar></TopDecoBar>
+
 <slot />
