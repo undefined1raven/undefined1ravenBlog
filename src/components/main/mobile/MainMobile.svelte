@@ -39,10 +39,10 @@
 	text="biobiobiobob biobiobiobob biobiobiobob biobiobiobob biobiobiobob biobiobiobob biobiobiobob"
 	color={$globalStyle.secondaryMono}
 	align="left"
-	figmaImport={{ mobile: { top: 129, left: 5 } }}
+	figmaImport={{ mobile: { top: 449, left: 5, height: 118, width: 350 } }}
 ></Label>
 <HorizontalLine
-	figmaImport={{ mobile: { left: 5, top: 369, width: 350, height: '1.1vh' } }}
+	figmaImport={{ mobile: { left: 5, top: 442, width: 350, height: '1.1vh' } }}
 	color="{$globalStyle.activeColor}00"
 	style="border-radius: {$globalStyle.borderRadius}; background-image: radial-gradient({$globalStyle.activeColor} 0%,{$globalStyle.activeColor}05 100%);background-size: 100% 100%;background-position: center center;"
 ></HorizontalLine>

@@ -13,11 +13,10 @@
 	import { flagConfig } from '../flagsConfig';
 	type ContainerConfig = { containerHeight: number | string; containerWidth: number | string };
 	$: containerConfig = {
-		containerHeight: 102,
-		containerWidth: 499
+		containerHeight: 79,
+		containerWidth: 350
 	};
 
-	const flagListContainerConfig: ContainerConfig = { containerWidth: 66, containerHeight: 102 };
 	let flagID: Flag;
 	let project: Project;
 	let ix: number;
@@ -25,35 +24,35 @@
 </script>
 
 <ListItem
-	style="margin-left: 1%; margin-right: 1%; min-width: 17.406143345%; max-width: 40.406143345%;"
+	style="margin-left: 1%; margin-right: 1%; min-height: 47.406143345%; max-width: 24.406143345%;"
 	transitions={getTransition(ix + 2)}
 	figmaImportConfig={containerConfig}
 	figmaImport={{
-		mobile: { width: '40.406143345%', height: 150 }
+		mobile: { width: '24.406143345%', height: 80 }
 	}}
 >
 	{#if flagID === 'dev'}
 		<Label
-			borderRadius="6px"
+			borderRadius="3px"
 			width="100%"
 			height="100%"
 			text="🏗️"
 			color={flagConfig.dev.activeMono}
 			verticalFont={'12px'}
-			backgroundColor="{flagConfig.dev.activeColor}20"
+			backgroundColor="{flagConfig.dev.activeColor}10"
 			borderColor="{flagConfig.dev.activeColor}00"
 		></Label>
 	{/if}
 	{#if flagID === 'v1'}
 		<Label
 			desktopFont={'12px'}
-			borderRadius="6px"
+			borderRadius="3px"
 			width="100%"
 			verticalFont={'12px'}
 			height="100%"
 			text="v1.0"
 			color={flagConfig.v1.activeMono}
-			backgroundColor="{flagConfig.v1.activeColor}20"
+			backgroundColor="{flagConfig.v1.activeColor}10"
 			borderColor="{flagConfig.v1.activeColor}00"
 		></Label>
 	{/if}
@@ -62,36 +61,36 @@
 			desktopFont={'14px'}
 			width="100%"
 			verticalFont={'12px'}
-			borderRadius="6px"
+			borderRadius="3px"
 			height="100%"
 			text="🚧 dep"
 			color={flagConfig.dep.activeMono}
-			backgroundColor="{flagConfig.dep.activeColor}20"
+			backgroundColor="{flagConfig.dep.activeColor}10"
 			borderColor="{flagConfig.dep.activeColor}00"
 		></Label>
 	{/if}
 	{#if flagID === 'src'}
 		<Label
 			desktopFont={'14px'}
-			borderRadius="6px"
+			borderRadius="3px"
 			width="90%"
 			height="100%"
 			text="src"
 			color={flagConfig.src.activeMono}
-			backgroundColor="{flagConfig.src.activeColor}20"
+			backgroundColor="{flagConfig.src.activeColor}10"
 			verticalFont={'12px'}
 		></Label>
 	{/if}
 	{#if flagID === 'live'}
 		<Label
 			desktopFont={'14px'}
-			borderRadius="6px"
+			borderRadius="3px"
 			width="90%"
 			height="100%"
 			verticalFont={'12px'}
 			text="live"
 			color={flagConfig.live.activeMono}
-			backgroundColor="{flagConfig.live.activeColor}20"
+			backgroundColor="{flagConfig.live.activeColor}10"
 		></Label>
 	{/if}
 </ListItem>

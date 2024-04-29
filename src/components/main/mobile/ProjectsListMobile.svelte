@@ -13,20 +13,18 @@
 	type ContainerConfig = { containerHeight: number | string; containerWidth: number | string };
 	$: isMini = $screenSize.width < desktopBreakpoints.first;
 	$: containerConfig = {
-		containerHeight: isMini ? 375 : 586,
-		containerWidth: isMini ? 1500 : 499
+		containerHeight: 311,
+		containerWidth: 350
 	};
 </script>
 
 <List
 	className="projectList"
 	horizontalCenter={isMini}
-	style="padding-left: 0.3%;"
 	figmaImport={{
-		mobile: { top: 385, left: '50%', width: 350, height: 186 },
-		desktop: {
-			top: isMini ? 700 : 251,
-			left: isMini ? '50%' : 1081,
+		mobile: {
+			top: 114,
+			left: '50%',
 			width: containerConfig.containerWidth,
 			height: containerConfig.containerHeight
 		}

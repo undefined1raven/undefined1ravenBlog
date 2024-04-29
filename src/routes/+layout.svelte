@@ -17,6 +17,7 @@
 	import { selectedProject } from '../stores/selectedProject';
 	import isMobile from '../fn/isMobile';
 	import BioDeco from '../components/deco/BioDeco.svelte';
+	import MobileMenu from '../components/common/Mobile/MobileMenu.svelte';
 	let menuFlickr = true;
 	function onColorSchemeIDChange(colorID: colorIDs) {
 		let stylesOverride = appColors[colorID];
@@ -104,6 +105,7 @@
 		style="opacity: 0.05; overflow: hidden; transform: translate(-50%, -50%);"
 	></BioDeco>
 	<!-- <Box left="0%" width="95%" backdropFilter="blur(2px)" height="95%"></Box> -->
+	<MobileMenu></MobileMenu>
 {/if}
 <TopDecoBar></TopDecoBar>
 <slot />
