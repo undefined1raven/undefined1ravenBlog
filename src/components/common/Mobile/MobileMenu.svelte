@@ -12,6 +12,20 @@
 	import { mobileIsMenuUp } from '../../../stores/menu';
 	import { getTransition } from '../../../fn/getTransisitions';
 	import { menu } from '../../../stores/menu';
+	import { contactButton, mainButton, projectViewBackButton } from '../../../config/menuButtons';
+	import windowHash from '../../../stores/windowHash';
+
+	const hashToMenuArray = {
+		'#main': [mainButton, contactButton],
+		'#contact': [mainButton, contactButton],
+		'#projectView': [mainButton, contactButton]
+	};
+
+	windowHash.subscribe((wh) => {
+		if (hashToMenuArray[wh]) {
+			menu.set(hashToMenuArray[wh]);
+		}
+	});
 </script>
 
 <Box
@@ -60,7 +74,7 @@
 				mobileIsMenuUp.set(false);
 			}
 		}}
-		transitions={{ in: { func: fly, options: { y: '2%', duration: 250 } } }}
+		transitions={{ in: { func: fly, options: { y: '2%', duration: 100 } } }}
 		style="z-index: 35;"
 		horizontalCenter={true}
 		figmaImport={{ mobile: { top: 28, left: '50%', width: 359, height: 612 } }}
@@ -69,17 +83,16 @@
 	>
 		<List top="0%" width="100%" height="80%">
 			{#each $menu as menuItem, ix}
-				<ListItem
-					MarginBottom="3%"
-					left="0%"
-					width="100%"
-					height="13%"
-				>
+				<ListItem MarginBottom="3%" left="0%" width="100%" height="13%">
 					<HorizontalLine left="0%" width="12%" color={$globalStyle.activeColor}></HorizontalLine>
 					<Button
 						id="menuButton_{ix}"
 						onClick={() => {
-							window.location.hash = menuItem.navHash;
+							if (menuItem.navHash !== undefined) {
+								window.location.hash = menuItem.navHash;
+							} else {
+								window.location.hash = menuItem.hash;
+							}
 							mobileIsMenuUp.set(false);
 						}}
 						left="12%"

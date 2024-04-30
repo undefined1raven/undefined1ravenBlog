@@ -42,6 +42,7 @@
 
 	$: hashToMenuParams = {
 		'#main': { classic: isMini ? 300 : 158, back: isMini ? 350 : 228 },
+		'#contact': { classic: isMini ? 300 : 158, back: isMini ? 350 : 228 },
 		'#projectView': { classic: isMini ? 370 : 158, back: isMini ? 400 : 228 }
 	};
 
