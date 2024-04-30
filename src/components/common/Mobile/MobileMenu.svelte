@@ -21,6 +21,8 @@
 		'#projectView': [mainButton, contactButton]
 	};
 
+	const containerConfig = { containerWidth: 359, containerHeight: 612 };
+
 	windowHash.subscribe((wh) => {
 		if (hashToMenuArray[wh]) {
 			menu.set(hashToMenuArray[wh]);
@@ -107,5 +109,85 @@
 				</ListItem>
 			{/each}
 		</List>
+		<Label
+			transitions={getTransition(1)}
+			color={$globalStyle.secondaryMono}
+			desktopFont={$globalStyle.tinyDesktopFont}
+			verticalFont={$globalStyle.smallMobileFont}
+			figmaImportConfig={containerConfig}
+			backgroundColor="{$globalStyle.activeColor}10"
+			figmaImport={{
+				mobile: {
+					left: 10,
+					top: 472,
+					width: 95,
+					height: 25
+				}
+			}}
+			style="border-top-right-radius: 0; border-bottom-right-radius: 0;"
+			align="left"
+			alignPadding="1%"
+			text="Commit Hash:"
+		></Label>
+		<Label
+			transitions={getTransition(1)}
+			color={$globalStyle.secondaryMono}
+			desktopFont={$globalStyle.tinyDesktopFont}
+			verticalFont={$globalStyle.smallMobileFont}
+			figmaImportConfig={containerConfig}
+			backgroundColor="{$globalStyle.activeColor}10"
+			figmaImport={{
+				mobile: {
+					left: 118,
+					top: 472,
+					width: 224,
+					height: 25
+				}
+			}}
+			align="left"
+			alignPadding="1%"
+			style="border-top-left-radius: 0; border-bottom-left-radius: 0;"
+			text="NNFDE"
+		></Label>
+		<Label
+			transitions={getTransition(2)}
+			color={$globalStyle.secondaryMono}
+			desktopFont={$globalStyle.tinyDesktopFont}
+			verticalFont={$globalStyle.smallMobileFont}
+			figmaImportConfig={containerConfig}
+			backgroundColor="{$globalStyle.activeColor}10"
+			figmaImport={{
+				mobile: {
+					left: 10,
+					top: 506,
+					width: 95,
+					height: 25
+				}
+			}}
+			style="border-top-right-radius: 0; border-bottom-right-radius: 0;"
+			align="left"
+			alignPadding="1%"
+			text="Last Update:"
+		></Label>
+		<Label
+			transitions={getTransition(2)}
+			color={$globalStyle.secondaryMono}
+			desktopFont={$globalStyle.tinyDesktopFont}
+			verticalFont={$globalStyle.smallMobileFont}
+			figmaImportConfig={containerConfig}
+			backgroundColor="{$globalStyle.activeColor}10"
+			figmaImport={{
+				mobile: {
+					left: 118,
+					top: 506,
+					width: 224,
+					height: 25
+				}
+			}}
+			align="left"
+			alignPadding="1%"
+			style="border-top-left-radius: 0; border-bottom-left-radius: 0;"
+			text="4 Mar 2024"
+		></Label>
 	</Box>
 {/if}
