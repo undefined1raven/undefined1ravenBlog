@@ -56,10 +56,10 @@
 
 {#if blurFilterVal > 0}
 	<Box
-		width="100%"
+		width="99.8%"
 		left="0%"
 		top="0%"
-		height="100%"
+		height="99.8%"
 		style="z-index: 50;"
 		backdropFilter="blur({blurFilterVal}px);"
 	></Box>

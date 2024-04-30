@@ -7,6 +7,8 @@
 	import toolTipState from '../../stores/toolTipState';
 	import readTransitions from '../../fn/readTransitions';
 	import { onMount } from 'svelte';
+	import { createEventDispatcher } from 'svelte';
+	const dispatch = createEventDispatcher();
 	let lglobalStyle = $globalStyle;
 	globalStyle.subscribe((gs) => {
 		lglobalStyle = gs;
@@ -83,14 +85,15 @@
 	<div
 		in:inFunc={inOptions}
 		out:outFunc={outOptions}
-		on:click={() => {
+		on:click={(e) => {
+			dispatch('onClick', e);
 			if (onClick) {
 				try {
 					onClick.apply();
 				} catch (e) {}
 			}
 		}}
-		on:mouseenter={() => {
+		on:mouseenter={(e) => {
 			if (toolTipText !== undefined && toolTipText !== '') {
 				toolTipState.set({ text: toolTipText, show: true });
 			}
@@ -123,7 +126,7 @@
 			: ''}; {horizontalCenter || verticalCenter
 			? `transform: translateX(${horizontalCenter == true ? '-50%' : '0px'}) translateY(${
 					verticalCenter == true ? '-50%' : '0px'
-			  });`
+				});`
 			: ''}; background-color: {backgroundColor !== undefined
 			? backgroundColor
 			: '#FFFFFF00'}; border-radius: {((parseFloat(

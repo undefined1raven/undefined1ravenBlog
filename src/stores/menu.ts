@@ -12,6 +12,8 @@ type MenuButton = {
     type: MenuButtonType
 }
 
+const mobileIsMenuUp = writable(false);
+
 const menu: Writable<Array<MenuButton>> = writable([
     { title: 'main', id: 'main', hash: '#main', func: () => { }, hotkey: 'm', type: 'classic', navHash: '#main' },
     { title: 'tech tree', id: 'techTree', hash: '#tree', func: () => { }, hotkey: 't', type: 'classic', navHash: '#tree' },
@@ -19,5 +21,5 @@ const menu: Writable<Array<MenuButton>> = writable([
 ])
 
 
-export { menu }
+export { menu, mobileIsMenuUp }
 export type { MenuButton, MenuButtonType }
