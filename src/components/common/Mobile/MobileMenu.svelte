@@ -63,14 +63,13 @@
 		transitions={{ in: { func: fly, options: { y: '2%', duration: 250 } } }}
 		style="z-index: 35;"
 		horizontalCenter={true}
-		figmaImport={{ mobile: { top: 28, left: '50%', width: 359, height: 600 } }}
+		figmaImport={{ mobile: { top: 28, left: '50%', width: 359, height: 612 } }}
 		backgroundColor="#05001199"
 		backdropFilter="blur(5px)"
 	>
 		<List top="0%" width="100%" height="80%">
 			{#each $menu as menuItem, ix}
 				<ListItem
-					transitions={getTransition(ix)}
 					MarginBottom="3%"
 					left="0%"
 					width="100%"
