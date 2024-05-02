@@ -13,6 +13,7 @@
 	import ProjectViewMain from '../components/projectView/ProjectViewMain.svelte';
 	import { hasLoaded } from '../stores/hasLoaded';
 	import isMobile from '../fn/isMobile';
+	import MobileProjectViewMain from '../components/projectView/mobile/MobileProjectViewMain.svelte';
 	let blurFilterVal = 10;
 
 	const allowedHashes = ['main', 'contact', 'tree', 'projectView'];
@@ -48,7 +49,7 @@
 		'#main': MainMobile,
 		'#contact': Main,
 		'#tree': Label,
-		'#projectView': ProjectViewMain
+		'#projectView': MobileProjectViewMain
 	};
 
 	$: onHashChange($windowHash);

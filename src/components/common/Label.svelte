@@ -1,5 +1,5 @@
 <script>
-	import { onMount } from 'svelte';
+	import { onDestroy, onMount } from 'svelte';
 	import isMobile from '../../fn/isMobile.ts';
 	import { RangeScaler } from '../../fn/RangeScaler.js';
 	import screenSize from '../../stores/screenSize';
@@ -58,15 +58,17 @@
 	let clientHeight = root.clientHeight;
 
 	const textAnimationChars = ['[', ']', ':', 'X', '#', '\\'];
-
+	let animationInterval;
+	let animationTimeout1;
+	let animationTimeout2;
 	onMount(() => {
 		let aniInterval = 40 / (animationRate > 0 ? animationRate : 0.1);
 		if (animateText === true) {
 			textActual = '';
-			setInterval(() => {
+			animationInterval = setInterval(() => {
 				if (textActual.length < text.length) {
 					textActual += textAnimationChars[getRandomInt(0, textAnimationChars.length - 1)];
-					setTimeout(() => {
+					animationTimeout1 = setTimeout(() => {
 						textActual = textActual.slice(0, textActual.length - 1);
 						let replacementChar = text[textActual.length];
 						textActual += replacementChar;
@@ -74,11 +76,20 @@
 				}
 			}, aniInterval);
 		}
-		setTimeout(() => {
-			textActual = text;
-		}, aniInterval * text.length);
+		animationTimeout2 = setTimeout(
+			() => {
+				textActual = text;
+			},
+			aniInterval * text.length + 5
+		);
 		fontController();
 		rendered = true;
+	});
+
+	onDestroy(() => {
+		if (animationInterval) {
+			clearInterval(animationInterval);
+		}
 	});
 
 	const { inFunc, inOptions, outFunc, outOptions } = readTransitions(transitions);

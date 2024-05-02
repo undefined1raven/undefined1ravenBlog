@@ -8,7 +8,8 @@ const flagConfig = {
     dev: { activeColor: lglobalStyle.activeColor, activeMono: lglobalStyle.activeMono },
     dep: { activeColor: '#FFB800', activeMono: '#FFB800' },
     v1: { activeColor: lglobalStyle.activeColor, activeMono: lglobalStyle.activeMono },
-    live: { activeColor: lglobalStyle.successColor, activeMono: lglobalStyle.successColor }
+    live: { activeColor: lglobalStyle.successColor, activeMono: lglobalStyle.successColor },
+    docs: { activeColor: lglobalStyle.activeColor, activeMono: lglobalStyle.activeMono },
 }
 
 
