@@ -8,6 +8,7 @@
 	import readTransitions from '../../fn/readTransitions.js';
 	import globalStyle from '../../stores/globalStyles.js';
 	import toolTipState from '../../stores/toolTipState';
+	import getRandomInt from '../../fn/getRandomInt.js';
 
 	let lglobalStyles = $globalStyle;
 
@@ -41,12 +42,14 @@
 	let horizontalCenter = false;
 	let verticalCenter = false;
 	let fontType = 'rigid';
+	let animateText = false;
 	let transitions = {};
 	let slotClassName = '';
 	let figmaImportConfig = { ...getFigmaImportConfig() };
 	let alignPadding = '0%';
 	let figmaImport = {};
-
+	let textActual = text;
+	let animationRate = 1;
 	const alignToPadding = { start: 'left', end: 'right', right: 'right', left: 'left' };
 
 	const root = document.documentElement;
@@ -54,7 +57,26 @@
 	let clientWidth = root.clientWidth;
 	let clientHeight = root.clientHeight;
 
+	const textAnimationChars = ['[', ']', ':', 'X', '#', '\\'];
+
 	onMount(() => {
+		let aniInterval = 40 / (animationRate > 0 ? animationRate : 0.1);
+		if (animateText === true) {
+			textActual = '';
+			setInterval(() => {
+				if (textActual.length < text.length) {
+					textActual += textAnimationChars[getRandomInt(0, textAnimationChars.length - 1)];
+					setTimeout(() => {
+						textActual = textActual.slice(0, textActual.length - 1);
+						let replacementChar = text[textActual.length];
+						textActual += replacementChar;
+					}, 10);
+				}
+			}, aniInterval);
+		}
+		setTimeout(() => {
+			textActual = text;
+		}, aniInterval * text.length);
 		fontController();
 		rendered = true;
 	});
@@ -131,6 +153,7 @@
 		alignPadding,
 		top,
 		left,
+		animateText,
 		horizontalFont,
 		verticalFont,
 		opacity,
@@ -209,7 +232,7 @@
 	padding-{alignToPadding[align]}: {alignPadding};
     {style}"
 	>
-		{text ? text : ''}
+		{textActual ? textActual : ''}
 		<slot class={slotClassName} />
 	</div>
 {/if}

@@ -52,11 +52,6 @@
 	></DropdownDeco>
 	<Label left="18%" text={$mobileIsMenuUp ? 'Hide Contents Menu' : 'Contents Menu'}></Label>
 	<Button
-		style="border-top-right-radius: {$mobileIsMenuUp
-			? '0px'
-			: $globalStyle.borderRadius}; border-top-left-radius: {$mobileIsMenuUp
-			? '0px'
-			: $globalStyle.borderRadius};"
 		onClick={() => {
 			mobileIsMenuUp.update((prev) => {
 				return !prev;

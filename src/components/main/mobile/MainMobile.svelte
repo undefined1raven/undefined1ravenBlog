@@ -15,11 +15,13 @@
 
 <Label
 	text="undefined1raven dev"
+	animateText={true}
 	verticalFont={$globalStyle.largeMobileFont}
 	figmaImport={{ mobile: { top: 39, left: 5 } }}
 ></Label>
 <Label
 	text="Dominic Zlat"
+	animateText={true}
 	color={$globalStyle.secondaryMono}
 	figmaImport={{ mobile: { top: 71, left: 5 } }}
 ></Label>
