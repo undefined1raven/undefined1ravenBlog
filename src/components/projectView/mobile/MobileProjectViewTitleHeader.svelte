@@ -38,6 +38,7 @@
 </script>
 
 <Box
+	style="z-index: 10;"
 	figmaImportConfig={containerConfig}
 	figmaImport={{
 		mobile: {
@@ -94,23 +95,35 @@
 	>
 	{#if isShowingOptionsMenu}
 		<List
+			style="z-index: 15; backdrop-filter: blur(0px);"
 			figmaImportConfig={headerElementsContainerConfig}
 			figmaImport={{ mobile: { left: 232, height: 218, top: 44, width: 118 } }}
 		>
 			{#each $selectedProject.flags as flag, ix}
-				<ListItem transitions={getTransition(ix + 1)} width="100%" height="15%" marginBottom="4%">
+				<ListItem
+					style="z-index: 20; backdrop-filter: blur(20px);"
+					transitions={getTransition(ix + 1)}
+					width="99%"
+					height="15%"
+					marginBottom="4%"
+				>
 					<Button
-						backdropFilter="blur(50px)"
 						label={flagIDToLabel[flag]}
 						align="left"
 						alignPadding="4%"
 						width="96%"
-						hoverOpacityMin={10}
-						hoverOpacityMax={20}
-						backgroundColor={flagConfig[flag]?.activeColor}
-						borderColor={flagConfig[flag]?.activeColor}
+						hoverOpacityMin={flagConfig[flag].type === 'button' ? 90 : 80}
+						hoverOpacityMax={flagConfig[flag].type === 'button' ? 90 : 80}
+						backgroundColor="{flagConfig[flag]?.secondaryColor}"
+						borderColor="{flagConfig[flag]?.activeColor}{flagConfig[flag].type === 'button'
+							? 'FF'
+							: 0}"
 						color={flagConfig[flag]?.activeMono}
 						height="100%"
+						onClick={() => {
+							
+						}}
+						backdropFilter="blur(20px);"
 					></Button>
 				</ListItem>
 			{/each}

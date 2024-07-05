@@ -1,4 +1,5 @@
-const desktopBreakpoints = { first: 1250, second: 600 }
+
+const desktopBreakpoints = { first: 1350, second: 600 }
 
 
 export { desktopBreakpoints }

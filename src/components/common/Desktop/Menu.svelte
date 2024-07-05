@@ -48,9 +48,9 @@
 
 	function getButtonWidth(menuButton: MenuButton, isMini) {
 		if (menuButton.type === 'classic') {
-			return hashToMenuParams[$windowHash].classic;
+			return hashToMenuParams[$windowHash]?.classic;
 		} else {
-			return hashToMenuParams[$windowHash].back;
+			return hashToMenuParams[$windowHash]?.back;
 		}
 	}
 

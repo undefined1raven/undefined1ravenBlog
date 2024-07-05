@@ -12,11 +12,15 @@
 	import ProjectViewTitleHeader from '../ProjectViewTitleHeader.svelte';
 	import { onMount } from 'svelte';
 	import MobileProjectViewTitleHeader from './MobileProjectViewTitleHeader.svelte';
-
+	import { selectedChapter } from '../selectedChapter';
 	$: containerConfig = {
 		containerHeight: 542,
 		containerWidth: 350
 	};
+
+	onMount(() => {
+		selectedChapter.set($selectedProject.chapters[0]);
+	});
 </script>
 
 <Box
@@ -30,5 +34,20 @@
 	}}
 	horizontalCenter={true}
 >
+	<Box
+		style="z-index: 1;"
+		horizontalCenter={true}
+		figmaImportConfig={containerConfig}
+		figmaImport={{
+			mobile: {
+				width: containerConfig.containerWidth,
+				height: 446,
+				left: '50%',
+				top: 44
+			}
+		}}
+	>
+		<svelte:component this={$selectedChapter.content}></svelte:component>
+	</Box>
 	<MobileProjectViewTitleHeader {containerConfig}></MobileProjectViewTitleHeader>
 </Box>

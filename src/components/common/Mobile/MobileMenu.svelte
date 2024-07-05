@@ -71,7 +71,7 @@
 				mobileIsMenuUp.set(false);
 			}
 		}}
-		transitions={{ in: { func: fly, options: { y: '2%', duration: 100 } } }}
+		transitions={{ in: { func: fly, options: { y: '2%', duration: 100 } }, out: { func: fly, options: { y: '-20%', duration: 1000 } } }}
 		style="z-index: 35;"
 		horizontalCenter={true}
 		figmaImport={{ mobile: { top: 28, left: '50%', width: 359, height: 612 } }}
