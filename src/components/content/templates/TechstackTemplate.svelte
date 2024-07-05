@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { getTransition } from '../../../fn/getTransisitions';
+	import isMobile from '../../../fn/isMobile';
 	import globalStyle from '../../../stores/globalStyles';
 	import screenSize from '../../../stores/screenSize';
 	import { selectedProject } from '../../../stores/selectedProject';
@@ -14,20 +15,29 @@
 
 	const defaultStackComponentDecoProps = { height: '70%' };
 	const defaultComponentMemberDecoProps = { height: '70%', left: '23%' };
+
+
+	function getNetwordDecoTop(){
+		if(isMobile()){
+			return '-21%'
+		}else{
+			return $screenSize.minimized ? '-15%' : '-18%';
+		}
+	}
 </script>
 
-<List width="90%" left="0%" height="95%">
+<List width="100%" left="0%" height="95%">
 	{#each $selectedProject.techStack as stackComponent, ix}
 		<ListItem
 			style="min-height: 40%;"
 			transitions={getTransition(ix, undefined, 'x')}
 			width="99%"
 			height="40%"
-			marginBottom="5%"
+			marginBottom={isMobile() ? '15%' : '5%'}
 		>
 			{#if ix !== 0 && ix <= $selectedProject.techStack.length - 1}
 				<Box
-					top={$screenSize.minimized ? '-15%' : '-18%'}
+					top={getNetwordDecoTop()}
 					width="2vh"
 					height={$screenSize.minimized ? '2vh' : '4vh'}
 					left="50%"
@@ -45,6 +55,7 @@
 					align="left"
 					borderRadius={$globalStyle.borderRadius}
 					alignPadding="3%"
+					verticalFont={$globalStyle.mediumMobileFont}
 					desktopFont={$globalStyle.mediumDesktopFont}
 					backgroundColor="{$globalStyle.activeColor}20"
 					style="border-bottom-right-radius: 0; border-bottom-left-radius: 0;"
@@ -77,12 +88,14 @@
 								width="30%"
 								height="80%"
 								text={componentMember.name}
+								verticalFont={$globalStyle.mediumMobileFont}
 								align="left"
 								alignPadding="2%"
 								desktopFont={$globalStyle.mediumDesktopFont}
 								style="border-right-top-radius: 0px; border-right-bottom-radius: 0px;"
 							></Label>
 							<Label
+								verticalFont={$globalStyle.mediumMobileFont}
 								fontType="soft"
 								left="45%"
 								desktopFont={$globalStyle.mediumDesktopFont}

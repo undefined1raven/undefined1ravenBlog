@@ -13,6 +13,7 @@
 	import { onMount } from 'svelte';
 	import MobileProjectViewTitleHeader from './MobileProjectViewTitleHeader.svelte';
 	import { selectedChapter } from '../selectedChapter';
+	import MobileProjectViewSectionController from './MobileProjectViewSectionController.svelte';
 	$: containerConfig = {
 		containerHeight: 542,
 		containerWidth: 350
@@ -49,5 +50,6 @@
 	>
 		<svelte:component this={$selectedChapter.content}></svelte:component>
 	</Box>
+	<MobileProjectViewSectionController {containerConfig}></MobileProjectViewSectionController>
 	<MobileProjectViewTitleHeader {containerConfig}></MobileProjectViewTitleHeader>
 </Box>

@@ -44,14 +44,22 @@
 	}}
 >
 	<DropdownDeco
+		color={$globalStyle.activeColor}
 		left="3%"
 		style="transform: rotate({$mobileIsMenuUp
 			? '-90deg'
 			: '90deg'}); transition: all ease-in-out 0.1s;"
 		height="50%"
 	></DropdownDeco>
-	<Label left="18%" text={$mobileIsMenuUp ? 'Hide Contents Menu' : 'Contents Menu'}></Label>
+	<Label
+		color={$globalStyle.activeMono}
+		left="18%"
+		text={$mobileIsMenuUp ? 'Hide Contents Menu' : 'Contents Menu'}
+	></Label>
 	<Button
+		color={$globalStyle.activeColor}
+		backgroundColor={$globalStyle.activeColor}
+		borderColor={$globalStyle.activeColor}
 		onClick={() => {
 			mobileIsMenuUp.update((prev) => {
 				return !prev;
@@ -71,7 +79,10 @@
 				mobileIsMenuUp.set(false);
 			}
 		}}
-		transitions={{ in: { func: fly, options: { y: '2%', duration: 100 } }, out: { func: fly, options: { y: '-20%', duration: 1000 } } }}
+		transitions={{
+			in: { func: fly, options: { y: '2%', duration: 100 } },
+			out: { func: fly, options: { y: '-20%', duration: 1000 } }
+		}}
 		style="z-index: 35;"
 		horizontalCenter={true}
 		figmaImport={{ mobile: { top: 28, left: '50%', width: 359, height: 612 } }}
