@@ -12,6 +12,7 @@ import BackendLogo from "../components/deco/BackendLogo.svelte";
 import DatabasesLogo from "../components/deco/DatabasesLogo.svelte";
 import { logoSources } from "./logoSources";
 import VercelLogo from "../components/deco/VercelLogo.svelte";
+import PlaceholderLogo from "../components/deco/PlaceholderLogo.svelte";
 
 type Chapter = { title: string, content: SvelteComponent, id: 'about' | 'status' | '3rdParty' | 'tech' | 'features' };
 type Flag = 'live' | 'src' | 'dev' | 'dep' | 'v1' | 'docs';
@@ -48,8 +49,9 @@ const projects: Array<Project> = [
         logo: RingRelayDeco,
         logoProps: { width: '100%', height: '70%' },
         srcHref: 'https://github.com/undefined1raven/Ring-Relay',
-        flags: ['live', 'src', 'v1', 'docs'],
+        flags: ['src', 'v1', 'docs'],
         startDate: 0,
+        docsHref: 'https://github.com/undefined1raven/Ring-Relay/blob/fe790f5f916ef166e50f2ca2855b71fec96cd78b/docs/Ring-Relay%20Documentation.pdf?raw=true',
         endDate: 0,
         chapters: [{ title: 'About', content: AboutTemplate, id: 'about' }, { title: 'Tech Stack', content: TechstackTemplate, id: 'tech' }],
         colorID: 'ringRelay',
@@ -105,11 +107,19 @@ const projects: Array<Project> = [
         shortDescription: 'Remotely flown custom UAV',
         srcHref: 'https://github.com/undefined1raven/VultureLink',
         flags: ['src'],
-        chapters: [{ title: 'About', content: AboutTemplate, id: 'about' }],
+        chapters: [{ title: 'About', content: AboutTemplate, id: 'about' }, { title: 'Tech Stack', content: TechstackTemplate, id: 'tech' }],
         logo: 'placeholder',
         startDate: 0,
         deploymentHref: '',
-        techStack: [],
+        techStack: [
+            { ...frontendStackComponentDefaults, members: [{ title: 'Svelte', deco: 'default', name: 'Library' }] },
+            { ...backendStackComponentDefaults, members: [{ title: 'Vercel', deco: VercelLogo, name: 'Platform' }] },
+            {
+                ...databasesStackComponentDefaults, members: [
+                    { title: 'Turso', deco: logoSources.turso, name: 'Bulk Data' },
+
+                ]
+            }, { title: 'Misc', deco: PlaceholderLogo, decoProps: {}, members: [{ title: 'MQTT', deco: 'default', name: 'Real-time Comms' }] }],
         endDate: 0,
         colorID: 'eagle',
         projectID: 'eagle-lts',
@@ -132,7 +142,7 @@ const projects: Array<Project> = [
         deploymentHref: '',
         endDate: 0,
         colorID: 'devLogs',
-        projectID: '',
+        projectID: 'dv-lgs',
         fullDescription: '[Under construction]'
     }, {
         title: 'Drone Buzz',
@@ -142,12 +152,15 @@ const projects: Array<Project> = [
         deploymentHref: 'https://dronebuzz.vercel.app',
         startDate: 0,
         endDate: 0,
-        chapters: [{ title: 'About', content: AboutTemplate, id: 'about' }],
+        chapters: [{ title: 'About', content: AboutTemplate, id: 'about' }, { title: 'Tech Stack', content: TechstackTemplate, id: 'tech' }],
         logo: MainMenuDeco,
         logoProps: { width: '100%', height: '90%' },
         colorID: 'droneBuzz',
-        projectID: '',
-        techStack: [],
+        projectID: 'drone-buzz',
+        techStack: [
+            { ...frontendStackComponentDefaults, members: [{ title: 'Svelte', deco: 'default', name: 'Library' }, { title: 'Vercel', deco: VercelLogo, name: 'Platform' }] },
+            { title: 'Misc', deco: PlaceholderLogo, decoProps: {}, members: [{ title: 'MapBox', deco: 'default', name: 'Map Renderer' }, { title: 'MapTiler', deco: 'default', name: 'Custom Maps' }] },
+        ],
         fullDescription: `Drone Buzz is a mobile single player game that lets you control a drone while trying to survive enemy drones or complete objectives. The game is projected on a real-world map so you could visit places you know in real life and to make it more interesting. You can choose between different loadouts and get access to powerful scorestreaks like UAVs and enemy missile disruptors as you survive for longer.`
     },
     {
@@ -160,9 +173,17 @@ const projects: Array<Project> = [
         deploymentHref: '',
         logo: 'placeholder',
         colorID: 'spiderEyes',
-        chapters: [{ title: 'About', content: AboutTemplate, id: 'about' }],
-        projectID: '',
-        techStack: [],
+        chapters: [{ title: 'About', content: AboutTemplate, id: 'about' }, { title: 'Tech Stack', content: TechstackTemplate, id: 'tech' }],
+        projectID: 'spdr-eys',
+        techStack: [
+            { ...frontendStackComponentDefaults, members: [{ title: 'Vue', deco: 'default', name: 'Library' }, { title: 'Heroku', deco: 'default', name: 'Platform' }] },
+            {
+                ...databasesStackComponentDefaults, members: [
+                    { title: 'MongoDB', deco: 'default', name: 'Bulk Data' },
+
+                ]
+            }
+        ],
         fullDescription: `Spider Eyes is a dream logging app that allows users to log various aspects of their dreams. Some of these aspects are feelings experienced, realism, dream types and more. The user can also use custom content tags to associate with each dream. There is also a dashboard that shows different stats about all of the logs [In progress]. For this project, I've used the Nuxt framework and Node for the backend. I used Vercel to deploy both the frontend and backend. The backend is composed of multiple functions that use Vercel's serverless feature. Currently working on adapting it for mobile.`
     }
 ];

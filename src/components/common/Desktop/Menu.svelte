@@ -27,9 +27,9 @@
 	$: isMini = $screenSize.width < desktopBreakpoints.first;
 
 	const hashToMenuArray = {
-		'#main': [mainButton, contactButton],
-		'#contact': [mainButton, contactButton],
-		'#projectView': [projectViewBackButton, mainButton, contactButton]
+		'#main': [mainButton],
+		'#contact': [mainButton],
+		'#projectView': [projectViewBackButton, mainButton]
 	};
 
 	function onHashChange(windowHash) {

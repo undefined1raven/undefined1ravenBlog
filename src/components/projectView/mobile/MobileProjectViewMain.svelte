@@ -15,7 +15,7 @@
 	import { selectedChapter } from '../selectedChapter';
 	import MobileProjectViewSectionController from './MobileProjectViewSectionController.svelte';
 	$: containerConfig = {
-		containerHeight: 542,
+		containerHeight: 550,
 		containerWidth: 350
 	};
 

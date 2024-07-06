@@ -43,7 +43,7 @@
 	align="left"
 	verticalFont={$globalStyle.mediumMobileFont}
 	style="align-items: start; overflow: scroll;"
-	figmaImport={{ mobile: { top: 443, left: 5, height: 118, width: 345 } }}
+	figmaImport={{ mobile: { top: 443, left: 5, height: 135, width: 345 } }}
 ></Label>
 <HorizontalLine
 	figmaImport={{ mobile: { left: 5, top: 428, width: 350, height: '1.1vh' } }}

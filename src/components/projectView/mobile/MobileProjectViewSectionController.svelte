@@ -24,7 +24,7 @@
 		}
 	}
 	$: selectedChapterIndex = getSelectedChapterIndex($selectedChapter);
-
+	$: isSingleChapterProject = $selectedProject.chapters.length === 1;
 	export { containerConfig, title };
 </script>
 
@@ -32,7 +32,7 @@
 	figmaImportConfig={containerConfig}
 	figmaImport={{
 		mobile: {
-			top: 492,
+			top: 505,
 			left: '0',
 			width: controlContainerConfig.containerWidth,
 			height: controlContainerConfig.containerHeight
@@ -59,12 +59,20 @@
 		}}
 		style="border-top-right-radius: 0px; border-bottom-right-radius: 0px;"
 		hoverOpacityMin={0}
-		hoverOpacityMax={20}
+		hoverOpacityMax={isSingleChapterProject ? 0 : 20}
 		figmaImportConfig={controlContainerConfig}
+		backgroundColor={isSingleChapterProject ? $globalStyle.inactiveColor : $globalStyle.activeColor}
+		borderColor={isSingleChapterProject ? $globalStyle.inactiveColor : $globalStyle.activeColor}
 		figmaImport={{ mobile: { left: 214, top: '0', width: 63, height: '100%' } }}
-		><DropdownDeco height="60%" style="transform: rotate(0deg);"></DropdownDeco></Button
+		><DropdownDeco
+			color={isSingleChapterProject ? $globalStyle.inactiveColor : $globalStyle.activeColor}
+			height="60%"
+			style="transform: rotate(0deg);"
+		></DropdownDeco></Button
 	>
 	<Button
+		backgroundColor={isSingleChapterProject ? $globalStyle.inactiveColor : $globalStyle.activeColor}
+		borderColor={isSingleChapterProject ? $globalStyle.inactiveColor : $globalStyle.activeColor}
 		onClick={() => {
 			if (selectedChapterIndex < $selectedProject.chapters.length - 1) {
 				selectedChapter.set($selectedProject.chapters[selectedChapterIndex + 1]);
@@ -74,9 +82,13 @@
 		}}
 		hoverOpacityMin={0}
 		style="border-top-left-radius: 0px; border-bottom-left-radius: 0px;"
-		hoverOpacityMax={20}
+		hoverOpacityMax={isSingleChapterProject ? 0 : 20}
 		figmaImportConfig={controlContainerConfig}
 		figmaImport={{ mobile: { left: 284, top: '0', width: 63, height: '100%' } }}
-		><DropdownDeco height="60%" style="transform: rotate(180deg);"></DropdownDeco></Button
+		><DropdownDeco
+			color={isSingleChapterProject ? $globalStyle.inactiveColor : $globalStyle.activeColor}
+			height="60%"
+			style="transform: rotate(180deg);"
+		></DropdownDeco></Button
 	>
 </Box>
