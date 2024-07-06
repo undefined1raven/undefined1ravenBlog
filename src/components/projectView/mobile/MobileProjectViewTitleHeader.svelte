@@ -13,6 +13,7 @@
 	import TopDecoBar from '../../common/TopDecoBar.svelte';
 	import ClsoeDeco from '../../deco/ClsoeDeco.svelte';
 	import DropdownDeco from '../../deco/DropdownDeco.svelte';
+	import LinkDeco from '../../deco/LinkDeco.svelte';
 	import OptionsDeco from '../../deco/OptionsDeco.svelte';
 	import ProjectViewDeco from '../../deco/ProjectViewDeco.svelte';
 	import { flagConfig } from '../../main/flagsConfig';
@@ -35,6 +36,7 @@
 	let isShowingOptionsMenu = false;
 	let contextMenuBlur = 0;
 	let blurChangeInterval;
+	const flagToProjectKeyMap = { live: 'deploymentHref', docs: 'docsHref', src: 'srcHref' };
 	const headerElementsContainerConfig = { containerHeight: 38, containerWidth: 350 };
 	export { containerConfig };
 </script>
@@ -130,22 +132,49 @@
 					height="7%"
 					marginBottom="4%"
 				>
-					<Button
-						className="contextMenu"
-						label={flagIDToLabel[flag]}
-						align="left"
-						alignPadding="4%"
-						width="96%"
-						hoverOpacityMin={flagConfig[flag].type === 'button' ? 0 : 40}
-						hoverOpacityMax={flagConfig[flag].type === 'button' ? 10 : 40}
-						borderColor="{flagConfig[flag]?.activeColor}{flagConfig[flag].type === 'button'
-							? 'FF'
-							: 0}"
-						color={flagConfig[flag]?.activeMono}
-						height="100%"
-						onClick={() => {}}
-						backdropFilter="blur(20px);"
-					></Button>
+					{#if flag === 'live' || flag === 'src' || flag === 'docs'}
+						<a
+							target="_blank"
+							href={$selectedProject[flagToProjectKeyMap[flag]]}
+							style="position: absolute; width: 100%; height: 99.2%; padding: 0; margin: 0; left: 0%; top: 0px;"
+						>
+							<Button
+								className="contextMenu"
+								label={flagIDToLabel[flag]}
+								align="left"
+								alignPadding="4%"
+								width="96%"
+								hoverOpacityMin={flagConfig[flag].type === 'button' ? 0 : 40}
+								hoverOpacityMax={flagConfig[flag].type === 'button' ? 10 : 40}
+								borderColor="{flagConfig[flag]?.activeColor}{flagConfig[flag].type === 'button'
+									? 'FF'
+									: 0}"
+								color={flagConfig[flag]?.activeMono}
+								height="100%"
+								onClick={() => {}}
+								backdropFilter="blur(20px);"
+								verticalFont={$globalStyle.mediumMobileFont}
+								><LinkDeco
+									height="70%"
+									style="right: -2%;"
+									top="25%"
+									color={flagConfig[flag]?.activeColor}
+								></LinkDeco></Button
+							></a
+						>
+					{:else}
+						<Label
+							className="contextMenu"
+							text={flagIDToLabel[flag]}
+							align="left"
+							alignPadding="4%"
+							width="96%"
+							backgroundColor="{flagConfig[flag]?.activeMono}30"
+							color={flagConfig[flag]?.activeMono}
+							height="99.2%"
+							verticalFont={$globalStyle.mediumMobileFont}
+						></Label>
+					{/if}
 				</ListItem>
 			{/each}
 		</List>
