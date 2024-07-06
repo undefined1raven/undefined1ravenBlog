@@ -33,6 +33,8 @@
 		docs: 'Docs'
 	};
 	let isShowingOptionsMenu = false;
+	let contextMenuBlur = 0;
+	let blurChangeInterval;
 	const headerElementsContainerConfig = { containerHeight: 38, containerWidth: 350 };
 	export { containerConfig };
 </script>
@@ -75,6 +77,14 @@
 	<Button
 		onClick={() => {
 			isShowingOptionsMenu = !isShowingOptionsMenu;
+			if (isShowingOptionsMenu) {
+				blurChangeInterval = setInterval(() => {
+					if (contextMenuBlur < 15) contextMenuBlur++;
+					if (contextMenuBlur === 15) clearInterval(blurChangeInterval);
+				}, 15);
+			} else {
+				contextMenuBlur = 0;
+			}
 		}}
 		figmaImportConfig={headerElementsContainerConfig}
 		hoverOpacityMax={0}
@@ -95,16 +105,16 @@
 	>
 	{#if isShowingOptionsMenu}
 		<List
-			style="z-index: 15; backdrop-filter: blur(0px);"
+			style="z-index: 15; backdrop-filter: blur({contextMenuBlur}px);"
 			figmaImportConfig={headerElementsContainerConfig}
-			figmaImport={{ mobile: { left: 232, height: 218, top: 44, width: 118 } }}
+			figmaImport={{ mobile: { left: 232, height: 440, top: 44, width: 118 } }}
 		>
 			{#each $selectedProject.flags as flag, ix}
 				<ListItem
-					style="z-index: 20; backdrop-filter: blur(20px);"
+					style="z-index: 20; backdrop-filter: blur(0px);"
 					transitions={getTransition(ix + 1)}
 					width="99%"
-					height="15%"
+					height="7%"
 					marginBottom="4%"
 				>
 					<Button
@@ -112,17 +122,14 @@
 						align="left"
 						alignPadding="4%"
 						width="96%"
-						hoverOpacityMin={flagConfig[flag].type === 'button' ? 90 : 80}
-						hoverOpacityMax={flagConfig[flag].type === 'button' ? 90 : 80}
-						backgroundColor="{flagConfig[flag]?.secondaryColor}"
+						hoverOpacityMin={flagConfig[flag].type === 'button' ? 0 : 40}
+						hoverOpacityMax={flagConfig[flag].type === 'button' ? 10 : 40}
 						borderColor="{flagConfig[flag]?.activeColor}{flagConfig[flag].type === 'button'
 							? 'FF'
 							: 0}"
 						color={flagConfig[flag]?.activeMono}
 						height="100%"
-						onClick={() => {
-							
-						}}
+						onClick={() => {}}
 						backdropFilter="blur(20px);"
 					></Button>
 				</ListItem>

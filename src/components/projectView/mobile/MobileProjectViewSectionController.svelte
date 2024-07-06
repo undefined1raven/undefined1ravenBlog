@@ -1,4 +1,5 @@
 <script>
+	import { projects } from '../../../config/projects';
 	import globalStyle from '../../../stores/globalStyles';
 	import { selectedProject } from '../../../stores/selectedProject';
 	import Box from '../../common/Box.svelte';
@@ -9,36 +10,44 @@
 	let containerConfig = { containerHeight: 1, containerWidth: 1 };
 	const controlContainerConfig = { containerHeight: 40, containerWidth: 350 };
 
+	let title = 'x';
+	let flickr = true;
 	function getSelectedChapterIndex(selectedChapter) {
+		flickr = false;
+		setTimeout(() => {
+			flickr = true;
+		}, 10);
 		if (selectedChapter !== undefined) {
 			return $selectedProject.chapters.findIndex((elm) => elm.id === selectedChapter.id);
 		} else {
-			return {};
+			return -1;
 		}
 	}
 	$: selectedChapterIndex = getSelectedChapterIndex($selectedChapter);
 
-	export { containerConfig };
+	export { containerConfig, title };
 </script>
 
 <Box
 	figmaImportConfig={containerConfig}
 	figmaImport={{
 		mobile: {
-			top: 495,
+			top: 492,
 			left: '0',
 			width: controlContainerConfig.containerWidth,
 			height: controlContainerConfig.containerHeight
 		}
 	}}
 >
-	<Label
-		backgroundColor="{$globalStyle.activeColor}20"
-		align="center"
-		figmaImport={{ mobile: { left: '0', width: 210, height: '100%', top: '0' } }}
-		figmaImportConfig={controlContainerConfig}
-		text={$selectedChapter.title}
-	></Label>
+	{#if flickr}
+		<Label
+			backgroundColor="{$globalStyle.activeColor}20"
+			align="center"
+			figmaImport={{ mobile: { left: '0', width: 210, height: '100%', top: '0' } }}
+			figmaImportConfig={controlContainerConfig}
+			text={title}
+		></Label>
+	{/if}
 	<Button
 		onClick={() => {
 			if (selectedChapterIndex > 0) {
@@ -52,7 +61,7 @@
 		hoverOpacityMin={0}
 		hoverOpacityMax={20}
 		figmaImportConfig={controlContainerConfig}
-		figmaImport={{ mobile: { left: 214, top: '0', width: 66, height: '100%' } }}
+		figmaImport={{ mobile: { left: 214, top: '0', width: 63, height: '100%' } }}
 		><DropdownDeco height="60%" style="transform: rotate(0deg);"></DropdownDeco></Button
 	>
 	<Button
@@ -67,7 +76,7 @@
 		style="border-top-left-radius: 0px; border-bottom-left-radius: 0px;"
 		hoverOpacityMax={20}
 		figmaImportConfig={controlContainerConfig}
-		figmaImport={{ mobile: { left: 284, top: '0', width: 66, height: '100%' } }}
+		figmaImport={{ mobile: { left: 284, top: '0', width: 63, height: '100%' } }}
 		><DropdownDeco height="60%" style="transform: rotate(180deg);"></DropdownDeco></Button
 	>
 </Box>

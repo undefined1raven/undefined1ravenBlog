@@ -50,6 +50,7 @@
 	>
 		<svelte:component this={$selectedChapter.content}></svelte:component>
 	</Box>
-	<MobileProjectViewSectionController {containerConfig}></MobileProjectViewSectionController>
+	<MobileProjectViewSectionController title={$selectedChapter.title} {containerConfig}
+	></MobileProjectViewSectionController>
 	<MobileProjectViewTitleHeader {containerConfig}></MobileProjectViewTitleHeader>
 </Box>
