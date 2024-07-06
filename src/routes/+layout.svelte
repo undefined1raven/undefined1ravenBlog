@@ -78,22 +78,22 @@
 	};
 </script>
 
-<!-- <svelte:window
+<svelte:window
 	on:mousemove={(e) => {
 		setTimeout(() => {
 			mousePosition.set({ x: e.clientX, y: e.clientY });
 		}, 200);
 	}}
 	on:touchend={(e) => {
-		// touchEnd.set(e.touches);
+		touchEnd.set(e.touches);
 	}}
 	on:touchmove={(e) => {
-		// touchMove.set(e.touches);
+		touchMove.set(e.touches);
 	}}
 	on:touchstart={(e) => {
-		// touchStart.set(e.touches);
+		touchStart.set(e.touches);
 	}}
-/> -->
+/>
 <ToolTip show={$toolTipState.show} text={$toolTipState.text} />
 {#if menuFlickr && !isMobile()}
 	<Menu {...menuProps[$windowHash]}></Menu>

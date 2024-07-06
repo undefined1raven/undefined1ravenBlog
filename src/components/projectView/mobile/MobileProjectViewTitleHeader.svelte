@@ -39,6 +39,18 @@
 	export { containerConfig };
 </script>
 
+<svelte:body
+	on:click={(e) => {
+		try {
+			const classNamesArray = e.target.className.split(' ');
+			const matchedClassName = classNamesArray.find((elm) => elm === 'contextMenu');
+			console.log(classNamesArray);
+			if (matchedClassName === undefined) {
+				isShowingOptionsMenu = false;
+			}
+		} catch (e) {}
+	}}
+/>
 <Box
 	style="z-index: 10;"
 	figmaImportConfig={containerConfig}
@@ -75,6 +87,7 @@
 		figmaImport={{ mobile: { left: 69, width: 266, height: '100%', top: '0' } }}
 	></Label>
 	<Button
+		className="contextMenu"
 		onClick={() => {
 			isShowingOptionsMenu = !isShowingOptionsMenu;
 			if (isShowingOptionsMenu) {
@@ -94,11 +107,11 @@
 		figmaImport={{ mobile: { left: 312, width: 38, height: 38, top: '0' } }}
 	>
 		{#if !isShowingOptionsMenu}
-			<Box transitions={getTransition(1)} width="80%" height="80%">
+			<Box className="contextMenu" transitions={getTransition(1)} width="80%" height="80%">
 				<OptionsDeco width="80%" height="50%"></OptionsDeco>
 			</Box>
 		{:else}
-			<Box transitions={getTransition(1)} width="80%" height="80%">
+			<Box className="contextMenu" transitions={getTransition(1)} width="80%" height="80%">
 				<ClsoeDeco width="80%" height="50%"></ClsoeDeco>
 			</Box>
 		{/if}</Button
@@ -118,6 +131,7 @@
 					marginBottom="4%"
 				>
 					<Button
+						className="contextMenu"
 						label={flagIDToLabel[flag]}
 						align="left"
 						alignPadding="4%"

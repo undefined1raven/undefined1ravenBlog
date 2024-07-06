@@ -153,7 +153,7 @@
 			align="left"
 			alignPadding="1%"
 			style="border-top-left-radius: 0; border-bottom-left-radius: 0;"
-			text="NNFDE"
+			text="448d374"
 		></Label>
 		<Label
 			transitions={getTransition(2)}
@@ -173,7 +173,7 @@
 			style="border-top-right-radius: 0; border-bottom-right-radius: 0;"
 			align="left"
 			alignPadding="1%"
-			text="Last Update:"
+			text="Last Update:"	
 		></Label>
 		<Label
 			transitions={getTransition(2)}
@@ -193,7 +193,7 @@
 			align="left"
 			alignPadding="1%"
 			style="border-top-left-radius: 0; border-bottom-left-radius: 0;"
-			text="4 Mar 2024"
+			text="6 Jul 2024"
 		></Label>
 	</Box>
 {/if}

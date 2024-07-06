@@ -114,6 +114,6 @@
 		align="left"
 		alignPadding="0.5%"
 		style="border-top-left-radius: 0; border-bottom-left-radius: 0; padding-right: 5%;"
-		text="4 Mar 2024"
+		text="6 Jul 2024"
 	></Label>
 </Box>

@@ -38,11 +38,12 @@
 	><img alt="Selfie" style="user-select: none;" width="100%" height="auto" src="/pic.webp" /></Box
 >
 <Label
-	text="biobiobiobob biobiobiobob biobiobiobob biobiobiobob biobiobiobob biobiobiobob biobiobiobob"
+	text="I'm a curious learner who loves tackling the challenges that come with building software that people find useful. Dealing with everything from designing to building and maintaining projects, I've used many different technologies in these past 5 years and I'm always looking forward to the next big project."
 	color={$globalStyle.secondaryMono}
 	align="left"
-	style="align-items: start;"
-	figmaImport={{ mobile: { top: 443, left: 5, height: 118, width: 350 } }}
+	verticalFont={$globalStyle.mediumMobileFont}
+	style="align-items: start; overflow: scroll;"
+	figmaImport={{ mobile: { top: 443, left: 5, height: 118, width: 345 } }}
 ></Label>
 <HorizontalLine
 	figmaImport={{ mobile: { left: 5, top: 428, width: 350, height: '1.1vh' } }}

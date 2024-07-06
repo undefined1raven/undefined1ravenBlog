@@ -119,10 +119,12 @@
 	<Label
 		transitions={getTransition(6, undefined, 'x')}
 		fontType="soft"
+		align="left"
+		width="70%"
 		desktopFont={$globalStyle.mediumDesktopFont}
 		figmaImportConfig={containerConfig}
 		figmaImport={{ desktop: { left: 14, top: 225 } }}
-		text="undefined1raven.dev"
+		text="I'm a curious learner who loves tackling the challenges that come with building software that people find useful. Dealing with everything from designing to building and maintaining projects, I've used many different technologies in these past 5 years and I'm always looking forward to the next big project."
 	></Label>
 	<Label
 		transitions={getTransition(6)}
@@ -169,7 +171,7 @@
 		align="left"
 		alignPadding="1%"
 		style="border-top-left-radius: 0; border-bottom-left-radius: 0;"
-		text="NNFDE"
+		text="448d374"
 	></Label>
 	<Label
 		transitions={getTransition(4)}
@@ -207,7 +209,7 @@
 		align="left"
 		alignPadding="1%"
 		style="border-top-left-radius: 0; border-bottom-left-radius: 0;"
-		text="4 Mar 2024"
+		text="6 Jul 2024"
 	></Label>
 </Box>
 
