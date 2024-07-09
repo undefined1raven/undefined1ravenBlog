@@ -44,7 +44,7 @@
 			figmaImport={{ mobile: { left: 117, width: 117, top: '100%', height: '100%' } }}
 			figmaImportConfig={containerConfig}
 			style="border-left: none;"
-			borderRadius="0px"><InstagramLogo width="60%" height="40%"></InstagramLogo></Button
+			borderRadius="0px"><InstagramLogo color={$globalStyle.activeColor} width="60%" height="40%"></InstagramLogo></Button
 		></a
 	>
 	<a
